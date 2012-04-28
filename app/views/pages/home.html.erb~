@@ -2,9 +2,10 @@
 <html>
   <head>
     <title>Scripting | <%= @title %></title>
-    <%= csrf_meta_tag %>
   </head>
   <body>
-    <%= yield %>
+
+    <h1>Scripting</h1>
+    <p>This is the Homepage for the WebTV scripting tool Scripting.</p>
   </body>
 </html>
