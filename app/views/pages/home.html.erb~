@@ -1,2 +1,4 @@
  <h1>Scripting</h1>
     <p>This is the Homepage for the WebTV scripting tool Scripting.</p>
+
+    <%= link_to "Sign up now!", '#', :class=>'signup_button round' %>

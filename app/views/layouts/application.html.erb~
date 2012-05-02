@@ -3,6 +3,7 @@
   <head>
     <title>Scripting | <%= @title %></title>
     <%= csrf_meta_tag %>
+    <%= javascript_include_tag 'application' %>
     <%= render 'layouts/stylesheets' =%>
   </head>
   <body>
@@ -11,6 +12,7 @@
       <section class="round">
 	<%= yield %>
       </section>
+      <%= render 'layouts/footer' %>
     </div>
   </body>
 </html>

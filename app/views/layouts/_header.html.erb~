@@ -1,0 +1,17 @@
+ <header>
+	<% logo = image_tag("logo.png", :alt=>"Scripting App", :class=>"round") %>
+	<%= link_to logo, root_path %>
+	<nav class="round">
+	  <ul>
+	    <li><%= link_to "Home", root_path %></li>
+	    <li><%= link_to "Help", help_path %></li>
+	    <li>
+		<% if user_signed_in? %>Hey <%= current_user.username %>. Not you?
+		  <%= link_to "Sign out", destroy_user_session_path %>
+		<% else %>
+		  <%= link_to "Sign in", new_user_session_path %>
+		<% end %>
+	    </li>
+	  </ul>
+	</nav>
+ </header>
