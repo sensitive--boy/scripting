@@ -2,10 +2,15 @@
 <html>
   <head>
     <title>Scripting | <%= @title %></title>
+    <%= csrf_meta_tag %>
+    <%= render 'layouts/stylesheets' =%>
   </head>
   <body>
-
-    <h1>Scripting</h1>
-    <p>This is the Homepage for the WebTV scripting tool Scripting.</p>
+    <div class="container">
+      <%= render 'layouts/header' %>
+      <section class="round">
+	<%= yield %>
+      </section>
+    </div>
   </body>
 </html>
