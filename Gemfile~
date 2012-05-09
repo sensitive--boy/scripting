@@ -38,6 +38,10 @@ group :test do
   gem "launchy", ">= 2.0.5"
 end
 
+group :production do
+  gem "pg"
+end
+
 
 
 # To use ActiveModel has_secure_password

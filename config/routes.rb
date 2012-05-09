@@ -1,4 +1,6 @@
 Scripting::Application.routes.draw do
+  devise_for :admins
+
   devise_for :users, :path_names => { :sign_up => "register" } do
     get '/users/sign_out' => 'devise/sessions#destroy'
 end

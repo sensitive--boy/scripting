@@ -25,7 +25,8 @@ gem "devise", ">= 2.0.4"
 
 
 group :development do
-  gem "rspec-rails", ">= 2.8.1"  
+  gem "rspec-rails", ">= 2.8.1" 
+  gem "annotate", "2.4.1.beta1"
 end
 
 group :test do
