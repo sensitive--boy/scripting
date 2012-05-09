@@ -1,5 +1,10 @@
 Scripting::Application.routes.draw do
+  get "people/new"
+
+  devise_for :admins
+
   devise_for :users, :path_names => { :sign_up => "register" }
+
 
   match '/about', :to=>'pages#about'
   match '/contact', :to=>'pages#contact'

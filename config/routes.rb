@@ -1,9 +1,9 @@
 Scripting::Application.routes.draw do
+  resources :people
+
   devise_for :admins
 
-  devise_for :users, :path_names => { :sign_up => "register" } do
-    get '/users/sign_out' => 'devise/sessions#destroy'
-end
+  devise_for :users, :path_names => { :sign_up => "register" }
 
 
   match '/about', :to=>'pages#about'

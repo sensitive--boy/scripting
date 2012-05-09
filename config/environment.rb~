@@ -1,0 +1,8 @@
+# Load the rails application
+require File.expand_path('../application', __FILE__)
+
+# Load custom validations file
+require 'custom_validations'
+
+# Initialize the rails application
+Scripting::Application.initialize!
