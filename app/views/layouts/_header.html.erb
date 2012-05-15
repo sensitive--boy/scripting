@@ -1,5 +1,5 @@
  <header>
-	<% logo = image_tag("logo.png", :alt=>"Scripting App", :class=>"round") %>
+	<% logo = image_tag("logo.png", :alt=>"Scripting App", :class=>"round", :width=>"200") %>
 	<%= link_to logo, root_path %>
 	<nav class="round">
 	  <ul>
@@ -8,7 +8,10 @@
 	    <li>
 		<% if user_signed_in? %>Hey <%= current_user.username %>. Not you?
 		  <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+		<% elsif admin_signed_in? %>I trust you, <%= current_admin.username %>.
+		  <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %>
 		<% else %>
+		  <%= link_to "Administrate", new_admin_session_path %> | 
 		  <%= link_to "Sign in", new_user_session_path %>
 		<% end %>
 	    </li>

@@ -1,0 +1,6 @@
+<%= form_for @person do |f| %>
+
+  <%= render :partial => 'person_fields', :locals => { :f => f } %>
+  
+  <%= f.submit %>
+<% end %>

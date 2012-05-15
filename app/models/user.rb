@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_one :person
+  has_many :videos
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,11 +14,12 @@ class User < ActiveRecord::Base
   attr_accessor :login
   
   
+  
   def self.find_first_by_auth_conditions(warden_conditions)
   conditions = warden_conditions.dup
   login = conditions.delete(:login).downcase
   where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
-end
+  end
 
 
 end
