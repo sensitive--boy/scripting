@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515152252) do
+ActiveRecord::Schema.define(:version => 20120515153136) do
 
   create_table "addresses", :force => true do |t|
     t.string   "venue"
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(:version => 20120515152252) do
   end
 
   add_index "audiotracks", ["szene_id"], :name => "index_audiotracks_on_szene_id"
+
+  create_table "characters", :force => true do |t|
+    t.string   "charactername"
+    t.integer  "treatment_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "characters", ["treatment_id"], :name => "index_characters_on_treatment_id"
 
   create_table "media_files", :force => true do |t|
     t.string   "description"
