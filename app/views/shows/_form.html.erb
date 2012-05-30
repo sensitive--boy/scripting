@@ -1,0 +1,27 @@
+<%= form_for @show do |f| %>
+  <div>
+     <%= f.label :title %>
+     <%= f.text_field :title %>
+  </div>
+  <div>
+     <%= f.label :date %>
+     <%= f.date_select :date, start_year: Time.now.year %>
+  </div>
+  <div>
+     <%= f.label :duration %>
+     <%= f.number_field :duration %>
+  </div>
+  <div>
+     <%= f.label :toppic %>
+     <%= f.text_field :toppic %>
+  </div>
+  <div>
+     <%= f.label 'responsible person' %>
+     <%= @person.firstname %>
+     <%= @person.name %>
+  </div>
+
+
+
+  <%= f.submit %> | <%= link_to 'back', videos_showmy_path %>
+<% end %>

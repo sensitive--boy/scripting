@@ -1,5 +1,6 @@
 class Video < ActiveRecord::Base
   belongs_to :user
+  belongs_to :show
   has_many :roles
   has_many :people, :through=>:roles
   has_many :sequences

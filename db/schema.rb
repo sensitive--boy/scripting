@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515153136) do
+ActiveRecord::Schema.define(:version => 20120530090401) do
 
   create_table "addresses", :force => true do |t|
     t.string   "venue"
@@ -113,6 +113,18 @@ ActiveRecord::Schema.define(:version => 20120515153136) do
   end
 
   add_index "sequences", ["video_id"], :name => "index_sequences_on_video_id"
+
+  create_table "shows", :force => true do |t|
+    t.datetime "date"
+    t.string   "title"
+    t.string   "toppic"
+    t.integer  "duration"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "shows", ["user_id"], :name => "index_shows_on_user_id"
 
   create_table "szenes", :force => true do |t|
     t.string   "place"

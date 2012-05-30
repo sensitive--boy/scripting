@@ -1,0 +1,14 @@
+<tr>
+<td><%= user.person.firstname %> <%= user.person.name %></td>
+<td> ------ </td>
+<td><%= mail_to user.email %></td>
+<td> ------ </td>
+<td>
+  <% if user.advisor %>
+    I am Advisor. <%= link_to "undo?", admin_admin_unmake_advisor_path(:id=>user) %>
+  <% else %>
+    <%= link_to "Make me advisor!", admin_admin_make_advisor_path(:id=>user) %>
+  <% end %>
+</td>
+<td><%= link_to 'Remove', admin_admin_destroy_user_path(:id=>user), :confirm => 'Are you sure?' %></td>
+</tr>

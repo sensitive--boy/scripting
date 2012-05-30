@@ -1,12 +1,13 @@
 class User < ActiveRecord::Base
   has_one :person
+  has_many :videos
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :login
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :login, :advisor?, :person_attributes
   # attr_accessible :title, :body
   
   # Virtual attribut for authenticatingby either username or email
@@ -19,6 +20,21 @@ class User < ActiveRecord::Base
   login = conditions.delete(:login).downcase
   where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
   end
+  
+  def become_advisor
+    self.advisor=true
+    save!
+    puts "advisor should be true now"
+    puts advisor?
+  end
+  
+  def normal_user
+    self.advisor=false
+    save!
+    puts "advisor should be false now"
+    puts advisor?
+  end
+      
 
 
 end

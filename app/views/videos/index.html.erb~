@@ -1,0 +1,7 @@
+<h1>Videos#index</h1>
+<ul>
+<%= @videos.each do |video| %>
+  <li><%= video.title %> --- <%= video.format %> --- <%= video.duration %> --- <%= video.user.person.firstname %> <%= video.user.person.name %> --- status</li>
+<% end %>
+</ul>
+

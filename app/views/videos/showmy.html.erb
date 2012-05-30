@@ -1,3 +1,58 @@
 <h1>Videos#showmy</h1>
-<p>Find me in app/views/videos/showmy.html.erb</p>
-<p>Beitrag anlegen</p>
+<div class='menue'>
+  <%= link_to 'meine Daten', edit_person_path(current_user.person) %>
+</div>
+<div class='menue'>
+  <%= link_to 'alle Beiträge', videos_path %>
+</div>
+<div class='menue'>
+  <%= link_to 'alle Sendungen', shows_path %>
+</div>
+<div class='menue'>
+  <%= link_to 'Beitrag anlegen', new_video_path %>
+</div>
+
+
+<% if current_user.advisor? %>
+  <div class='menue'>
+    <%= link_to 'Sendung anlegen', new_show_path %>
+  </div>
+
+  <div class='table'>
+    <h3>Meine Sendungen</h3>
+    <table>
+      <tr>
+	<th>Titel</th>
+	<th>Thema</th>
+	<th>Sendedatum</th>
+	<th>Status</th>
+      </tr>
+      <% @shows.each do |show| %>
+	<tr>
+	  <td><%= show.title %></td>
+	  <td><%= show.toppic %></td>
+	  <td><%= show.date %></td>
+	  <td></td>
+	</tr>
+      <% end %>
+    </table>
+<% end %>
+
+<div class='table'>
+  <h3>Meine Beiträge</h3>
+  <table>
+    <tr>
+      <th>Titel</th>
+      <th>verantwortlich</th>
+      <th>Sendung</th>
+      <th>Status</th>
+    </tr>
+    <% @videos.each do |video| %>
+      <tr>
+	<td><%= video.title %></td>
+	<td><%= video.user.person.firstname %> <%= video.user.person.name %></td>
+	<td>-</td>
+	<td></td>
+      </tr>
+    <% end %>
+  </table>

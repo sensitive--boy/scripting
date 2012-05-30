@@ -1,0 +1,32 @@
+<h1>Create a new Videoscript</h1>
+<%= form_for @video do |f| %>
+
+<div class="field">
+<%= f.label :title %>
+<%= f.text_field :title %>
+</div>
+
+<div class="field">
+<%= f.label :format %>
+<%= f.text_field :format %>
+</div>
+
+<div class="field">
+<%= f.label :supposed_duration %>
+<%= f.text_field :supposed_duration %>
+</div>
+
+<div class="field">
+<%= f.label :summary %>
+<%= f.text_area :title %>
+</div>
+
+<div class="field">
+<%= f.label "responsable Person: " %><%= @video.user.person.firstname %> <%= @video.user.person.name %>
+</div>
+
+<%= f.submit %>
+
+<% end %>
+
+

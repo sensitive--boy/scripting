@@ -1,0 +1,9 @@
+<h1>Show#index</h1>
+<ul>
+<% @shows.each do |show| %>
+  <li><%= show.title %> --- <%= show.date %> --- <%= show.duration %> Sekunden --- <%= show.user.person.firstname %> <%= show.user.person.name %> --- Status </li>
+<% end %>
+</ul>
+
+
+<%= link_to 'back', videos_showmy_path %>

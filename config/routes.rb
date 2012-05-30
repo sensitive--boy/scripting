@@ -1,27 +1,30 @@
 Scripting::Application.routes.draw do
-  get "videos/new"
 
-  get "videos/edit"
-
-  get "videos/show"
 
   get "videos/showmy"
-
-  get "videos/index"
-
-  get "addresses/new"
-
+  get "admin/admin/administrate_users"
+  get "admin/admin/make_advisor"
+  get "admin/admin/unmake_advisor"
+  get "admin/admin/destroy_user"
+  
   resources :people
+  resources :addresses
 
   devise_for :admins
 
   devise_for :users, :path_names => { :sign_up => "register" }
   
+  devise_scope :user do
+    resources :shows
+    resources :videos
+  end
+  
 
-  # redirect after sign_up (im Moment wahrscheinlich auch sign in)
+  # redirect after sign_up
   match 'dashboard' => 'application#personalize', :as => 'user_root'
-
+  match 'administrate' => 'admin/admin#administrate', :as => 'admin_root'
  
+  
   match '/about', :to=>'pages#about'
   match '/contact', :to=>'pages#contact'
   match '/help', :to=>'pages#help'
