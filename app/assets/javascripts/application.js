@@ -12,4 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require_tree .
+
+$(function() {
+  $('.delete_sequence').bind('ajax:success', function() {  
+    $(this).closest('li').fadeOut();  
+  });
+  
+  $("#people a").live("click", function(){
+    $.getScript(this.href);
+    return false;
+  });
+});

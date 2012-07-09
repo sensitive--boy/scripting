@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530090401) do
+ActiveRecord::Schema.define(:version => 20120707100332) do
 
   create_table "addresses", :force => true do |t|
     t.string   "venue"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20120530090401) do
     t.integer  "person_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "take_id"
   end
 
   add_index "addresses", ["person_id"], :name => "index_addresses_on_person_id"
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20120530090401) do
     t.integer  "treatment_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "person_id"
   end
 
   add_index "characters", ["treatment_id"], :name => "index_characters_on_treatment_id"
@@ -79,7 +81,6 @@ ActiveRecord::Schema.define(:version => 20120530090401) do
 
   create_table "people", :force => true do |t|
     t.string   "name"
-    t.string   "firstname"
     t.string   "email"
     t.string   "phone"
     t.string   "mobile"
@@ -96,13 +97,15 @@ ActiveRecord::Schema.define(:version => 20120530090401) do
 
   create_table "roles", :force => true do |t|
     t.string   "role"
-    t.integer  "show_id"
-    t.integer  "video_id_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "video_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "person_id"
   end
 
-  add_index "roles", ["video_id_id"], :name => "index_roles_on_video_id_id"
+  add_index "roles", ["person_id"], :name => "index_roles_on_person_id"
+  add_index "roles", ["role"], :name => "index_roles_on_role"
+  add_index "roles", ["video_id"], :name => "index_roles_on_video_id"
 
   create_table "sequences", :force => true do |t|
     t.string   "name"
@@ -153,7 +156,7 @@ ActiveRecord::Schema.define(:version => 20120530090401) do
 
   create_table "treatments", :force => true do |t|
     t.text     "text"
-    t.string   "main_characteristc"
+    t.string   "main_characteristic"
     t.string   "conflict"
     t.string   "development"
     t.string   "storyline"
@@ -162,8 +165,8 @@ ActiveRecord::Schema.define(:version => 20120530090401) do
     t.string   "moral"
     t.string   "keywords"
     t.integer  "video_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   add_index "treatments", ["video_id"], :name => "index_treatments_on_video_id"

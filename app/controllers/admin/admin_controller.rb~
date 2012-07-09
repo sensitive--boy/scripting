@@ -5,34 +5,35 @@ class Admin::AdminController < ActionController::Base
   
   def administrate
     @admin=current_admin
+    @users=User.all
   end
   
   def administrate_users
-    @users=User.all
+    
   end
   
   def make_advisor
     find_user
-    user.become_advisor
+    @user.become_advisor
     show_all_users
   end
   
   def unmake_advisor
     find_user
-    user.normal_user
+    @user.normal_user
     show_all_users
   end
   
   def destroy_user
     find_user
-    user.destroy
+    @user.destroy
     show_all_users
   end
   
   private
   
   def find_user
-    user=User.find(params[:id])
+    @user=User.find(params[:id])
   end
   
   def show_all_users

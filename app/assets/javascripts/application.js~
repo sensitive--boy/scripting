@@ -10,6 +10,30 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-= require jquery
-= require jquery_ujs
+//= require jquery
+//= require jquery_ujs
+//= require jquery.ui.all
+//= require autocomplete-rails
+//= require bootstrap/transition
+//= require bootstrap/alerts
+//= require bootstrap/modal
+//= require bootstrap/dropdown
+//= require bootstrap/scrollspy
+//= require bootstrap/tabs
+//= require bootstrap/twipsy
+//= require bootstrap/popover
+//= require bootstrap/button
+//= require bootstrap/carousel
+//= require bootstrap/collapse
 //= require_tree .
+
+$(function() {
+  $('.delete_sequence').bind('ajax:success', function() {  
+    $(this).closest('li').fadeOut();  
+  });
+  
+  $("#people a").live("click", function(){
+    $.getScript(this.href);
+    return false;
+  });
+});

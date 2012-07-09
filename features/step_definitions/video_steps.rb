@@ -16,8 +16,7 @@ Wenn /^viola angemeldet und eingeloggt ist$/ do
 end
 
 Wenn /^seine Personendaten eingegeben hat$/ do
-  fill_in "person_firstname", with: "Viola"
-  fill_in "person_name", with: "Zurück"
+  fill_in "person_name", with: "Viola Zurück"
   fill_in "person_address_attributes_address", with: "Beispiel-Los-Straße 69"
   click_button "Update Person"
   page.should have_link("Beitrag anlegen")
@@ -37,7 +36,7 @@ end
 
 
 
-Gegebensei /^ein User "([^"]*)"$/ do |arg1|
+Gegebensei /^ein anderer User "([^"]*)"$/ do |arg1|
   User.create(username: "kerstin") 
 end
 
@@ -50,8 +49,7 @@ Wenn /^kerstin angemeldet und eingeloggt ist$/ do
   fill_in "user_password_confirmation", with: "example"
   click_button "Sign up"
   page.should have_content("data.")
-  fill_in "person_firstname", with: "Kerstin"
-  fill_in "person_name", with: "Vorwärts"
+  fill_in "person_name", with: "Kerstin Vorwärts"
   fill_in "person_address_attributes_address", with: "Beispiel-Haft-Straße 42"
   click_button "Update Person"
   page.should have_link("Beitrag anlegen")
@@ -65,11 +63,12 @@ Wenn /^kerstin die Eigenschaft advisor hat$/ do
   fill_in "admin_password", with: "scripting"
   click_button "Sign in"
   page.should have_link("administrate users")
-  click_link "administrate users"
-  page.should have_content("kerstin")
-  page.should have_link("Make me advisor!")
   save_and_open_page
-  click_link "Make me advisor!" for "kerstin"
+  click_link "administrate users"
+  page.should have_content("Administrate Users")
+  page.should have_link("Make me advisor!")
+  click_link "Make me advisor!"
+  page.should have_content("I am Advisor.")
   click_link "Sign out"
   click_link "Sign_in"
   fill_in "user_login", with: "kerstin"

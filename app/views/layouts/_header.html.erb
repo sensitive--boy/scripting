@@ -1,20 +1,33 @@
  <header>
-	<% logo = image_tag("logo.png", :alt=>"Scripting App", :class=>"round", :width=>"200") %>
-	<%= link_to logo, root_path %>
-	<nav class="round">
-	  <ul>
-	    <li><%= link_to "Home", root_path %></li>
-	    <li><%= link_to "Help", help_path %></li>
-	    <li>
-		<% if user_signed_in? %>Hey <%= current_user.username %>. Not you?
-		  <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-		<% elsif admin_signed_in? %>I trust you, <%= current_admin.username %>.
-		  <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %>
-		<% else %>
-		  <%= link_to "Administrate", new_admin_session_path %> | 
-		  <%= link_to "Sign in", new_user_session_path %>
-		<% end %>
-	    </li>
-	  </ul>
-	</nav>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+	<a class="brand" href="#">
+	  <h1>Scripting</h1>
+	</a>
+        <div class="nav-collapse pull-right">
+          <ul class="nav">
+            <li><%= link_to "Home", root_path %></li>
+	    <li class="divider-vertical"></li>
+            <li><%= link_to "Help", help_path %></li>
+	    <li class="divider-vertical"></li>
+            <% if user_signed_in? %>
+	      <li><p navbar-text>Hey <%= current_user.username %>. Not you? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %></p></li>
+	    <% elsif admin_signed_in? %>
+	      <li><p navbar-text>I trust you, <%= current_admin.username %>. <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %></p></li>
+	    <% else %>
+		<li><%= link_to "Administrate", new_admin_session_path %></li>
+		<li class="divider-vertical"></li>
+		<li><%= link_to "Sign in", new_user_session_path %></li>
+	    <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
  </header>

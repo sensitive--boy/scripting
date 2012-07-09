@@ -1,0 +1,2 @@
+module SzenesHelper
+end

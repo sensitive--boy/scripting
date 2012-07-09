@@ -23,5 +23,5 @@
 
 
 
-  <%= f.submit %> | <%= link_to 'back', video_showmy_path %>
+  <%= f.submit %> | <%= link_to 'back', videos_showmy_path %>
 <% end %>

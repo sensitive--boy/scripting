@@ -1,4 +1,4 @@
-<% if params[:url]==*/admins/sign_in %>
+<% if resource_name == :admin %>
 <h2>Sign in as Admin</h2>
 <% else %>
 <h2>Sign in</h2>
@@ -18,4 +18,6 @@
   <div><%= f.submit "Sign in" %></div>
 <% end %>
 
+<% if resource_name == :user %>
 <%= render "links" %>
+<% end %>

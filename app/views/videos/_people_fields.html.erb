@@ -1,0 +1,13 @@
+<tr>
+  <td>
+      <%= f.label :role %>
+      <%= f.select :role, Role::ROLES, :prompt=>"Bitte wählen" %>
+  </td>
+  <td>
+      <%= f.label :person_tokens, "Person" %>
+      <%= f.select :person_id, @people %>
+  </td>
+  <td>
+      <%= video_link_to_remove_fields "entfernen", f %>
+  </td>
+</tr>

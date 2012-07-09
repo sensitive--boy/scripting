@@ -1,0 +1,8 @@
+<ul id="people_list">
+<%= @video.roles.each do |role| %>
+  <%= f.fields_for role do |per| %>
+    <%= render :partial=>'people_fields', :locals=>{:f=>per, :role=>role} %>
+  <% end %>
+    <%= link_to "person hinzufügen", add_role_video_path, :method=>:put %>
+<% end %>
+</ul>

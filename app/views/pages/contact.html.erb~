@@ -1,11 +1,2 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Scripting | <%= @title %></title>
-  </head>
-  <body>
-
-    <h1>Scripting</h1>
+<h1>Scripting</h1>
     <p>This is the contact page for the WebTV scripting tool Scripting.</p>
-  </body>
-</html>

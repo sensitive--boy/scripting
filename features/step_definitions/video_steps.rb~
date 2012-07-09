@@ -37,7 +37,7 @@ end
 
 
 
-Gegebensei /^ein User "([^"]*)"$/ do |arg1|
+Gegebensei /^ein anderer User "([^"]*)"$/ do |arg1|
   User.create(username: "kerstin") 
 end
 
@@ -64,12 +64,13 @@ Wenn /^kerstin die Eigenschaft advisor hat$/ do
   fill_in "admin_login", with: "admin"
   fill_in "admin_password", with: "scripting"
   click_button "Sign in"
-  save_and_open_page
   page.should have_link("administrate users")
+  save_and_open_page
   click_link "administrate users"
-  page.should have_content("kerstin")
+  page.should have_content("Administrate Users")
   page.should have_link("Make me advisor!")
-  click_link "Make me advisor!" for "kerstin"
+  click_link "Make me advisor!"
+  page.should have_content("I am Advisor.")
   click_link "Sign out"
   click_link "Sign_in"
   fill_in "user_login", with: "kerstin"

@@ -1,0 +1,12 @@
+<li>
+<span class="handle">[verschieben]</span>
+Szene <%= szene.position %> | <%= link_to szene.title, szene %> -- <%= szene.place %> ----- <%= link_to 'Delete', szene, method: :delete, :confirm => "really?" %>
+<hr>
+<ul id="takes">
+    <% szene.takes.each do |take| %>
+        <%= render :partial => "takes/take_short", :locals=>{:take=>take} %>
+    <% end %>
+ </ul>
+<%= link_to 'neuen Take anlegen', new_take_path(:szene_id => szene.id) %>
+<br><br>
+</li>

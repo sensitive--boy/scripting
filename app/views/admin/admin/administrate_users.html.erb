@@ -1,17 +1,24 @@
-<h1>Administrate Users</h1>
+<div class="row-fluid">
+  <div class="span2">
+    
+  </div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th>Email</th>
-    <th></th>
-    <th>Advisor</th>
-    <th>Delete</th>
-  </tr>
+  <div class="span10">
+    <h1>Administrate Users</h1>
 
-<%= @users.each do |user| %>
-  <%= render 'user', :user=>user %>
-<% end %>
-</table>
+    <table>
+      <tr>
+	<th>Name</th>
+	<th></th>
+	<th>Email</th>
+	<th></th>
+	<th>Advisor</th>
+	<th>Delete</th>
+      </tr>
 
+    <%= @users.each do |user| %>
+      <%= render 'user', :user=>user %>
+    <% end %>
+    </table>
+  </div>
+</div>

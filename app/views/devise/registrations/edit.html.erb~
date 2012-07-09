@@ -18,13 +18,6 @@
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></div>
 
-
-  <!--<% #if resource_name==user %>
-    <%= #f.fields_for :person do |person| %>
-      <%= #render :partial => 'person/person_fields', :locals => { :f => person } %>
-    <% #end %>
-  <% #end %>-->
-
   <div><%= f.submit "Update" %></div>
 <% end %>
 

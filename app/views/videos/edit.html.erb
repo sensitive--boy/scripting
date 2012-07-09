@@ -1,2 +1,59 @@
-<h1>Videos#edit</h1>
-<p>Find me in app/views/videos/edit.html.erb</p>
+<div class="row-fluid">
+  <div class="span2">
+  </div>
+  <div class="span10">
+<%= form_for @video do |f| %>
+<h1><%= @video.title %></h1>
+
+<% if current_user=@video.user %>
+  <%= link_to 'Video löschen', video_path(@video), :method=>:delete, :confirm => 'Are you sure?' %>
+<% end %>
+
+<div class="fields">
+<%= f.label :format %>
+<%= @video.format %>
+</div>
+<div class="fields">
+<%= f.label 'ist Teil der Sendung' %>
+<% if @video.show %>
+  <%= @video.show.topic %> am <%= @video.show.date %>
+<% end %>
+</div>
+<div class="fields">
+<%= f.label :supposed_duration %>
+<%= f.number_field :supposed_duration %> /
+<%= f.label :duration %>
+<%= @video.duration %>
+</div>
+<div class="fields">
+<%= f.label 'responsible Person' %>
+<%= @video.user.person.name %>
+</div>
+
+<section>
+<%= f.label :summary %><br>
+<%= @video.summary %>
+</section>
+
+
+<%= link_to "Treatment bearbeiten", edit_treatment_path(:video_id=>@video.id) %> zuletzt bearbeitet: <%= @video.treatment.updated_at %> von: <br>
+<section>
+Mitwirkende:<br>
+<div id="people">
+  <%= render :partial=>'people_roles', :locals=>{:f=>f} %>
+  <%= link_to "person hinzufügen", add_role_video_path, :method=>:put %>
+</div>
+</section>
+<%= link_to "Script bearbeiten", script_videos_path(:id=>@video.id) %> zuletzt bearbeitet: <%= @video.updated_at %> von: <br>
+<%= link_to "Drehplan zeigen", takes_path(@video) %><br>
+<section>
+Technik:
+</section>
+<div>
+<%= f.submit %> | <%= link_to "Zurück ohne speichern", videos_showmy_path %>
+</div>
+<% end %>
+
+
+</div>
+</div>

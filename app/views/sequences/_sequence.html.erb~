@@ -1,0 +1,12 @@
+<li>
+<span class="handle">[verschieben]</span>
+Sequenz <%= sequence.position %> | <%= sequence.name %> ------- <%= link_to "Delete", sequence, method: :delete, confirm: "Are you sure?" %> --- <%= link_to "Edit", edit_sequence_path(sequence.id) %>
+<hr>
+<ul id="szenes">
+    <% sequence.szenes.each do |szene| %>
+        <%= render :partial => "szenes/szene_short", :locals=>{:szene=>szene} %>
+    <% end %>
+ </ul>
+<%= link_to 'neue Szene anlegen', new_szene_path(:sequence_id => sequence.id) %>
+<br><br>
+</li>

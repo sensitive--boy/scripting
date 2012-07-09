@@ -1,0 +1,36 @@
+<%= form_for @take do |f| %>
+<h3>Take <%= @take.position %> in Szene <%= @take.szene.position %>: <%= @take.szene.title %></h3>
+<div class="fields">
+  <%= f.label :duration %>
+  <%= f.text_field :duration %>
+</div>
+<div class="fields">
+  <table>
+  <tr>
+  <th><%= f.label :view_desc %></th>
+  <th><%= f.label :audio_desc %></th>
+  </tr>
+  <tr>
+  <td><%= f.text_area :view_desc %></td>
+  <td><%= f.text_area :audio_desc %></td>
+  </tr>
+  </table>
+</div>
+<div class="fields">
+  <%= f.label :note %>
+  <%= f.text_field :note %>
+</div>
+<div class="fields">
+    <%= f.label :address %>
+    <% if @take.address %>
+      <%= @take.address.venue %>
+    <% else %>
+      <%= f.select :address, @addresses %>
+    <% end %>
+</div>
+<%= f.hidden_field :szene_id, :value => @take.szene.id %>
+
+<br>
+
+<%= f.submit %> | <%= link_to "Zurück ohne speichern", script_videos_path(:id => @take.szene.sequence.video.id) %>
+<% end %>

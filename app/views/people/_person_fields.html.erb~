@@ -1,4 +1,4 @@
-<div class="field">
+  <div class="field">
     <%= f.label :firstname -%>
     <%= f.text_field :firstname -%>
   </div>

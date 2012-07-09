@@ -10,5 +10,5 @@
     <%= link_to "Make me advisor!", admin_admin_make_advisor_path(:id=>user) %>
   <% end %>
 </td>
-<td><%= link_to 'Remove', admin_admin_destroy_user_path, :confirm => 'Are you sure?' %></td>
+<td><%= link_to 'Remove', admin_admin_destroy_user_path(:id=>user), :confirm => 'Are you sure?' %></td>
 </tr>

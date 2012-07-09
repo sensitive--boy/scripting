@@ -1,0 +1,63 @@
+<%= form_for @treatment do |f| %>
+
+<h1>Treatment for <%=@treatment.video.title %></h1>
+  <div class="fields">
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </div>
+
+  <div class="fields">
+    <%= fields_for @treatment.main_character do |char| %>
+      <%= char.label :charactername %><br>
+      <%= char.text_field :charactername %>
+    
+      <%= char.label "Person", :person_name %>
+      <%= char.text_field :person_name %>
+      <%= char.hidden_field :person_id %>
+      <%= link_to "neue Person anlegen", new_person_path %>
+    <% end %>
+  </div>
+
+  <div class="fields">
+    <%= f.label :main_characteristic %><br>
+    <%= f.text_field :main_characteristic %>
+  </div>
+
+  <div class="fields">
+    <%= f.label :conflict %><br>
+    <%= f.text_field :conflict %>
+  </div>
+
+  <div class="fields">
+    <%= f.label :development %><br>
+    <%= f.text_field :development %>
+  </div>
+
+  <div class="fields">
+    <%= f.label :storyline %><br>
+    <%= f.text_field :storyline %>
+  </div>
+
+  <div class="fields">
+    <%= f.label :place %><br>
+    <%= f.text_field :place %>
+  </div>
+
+  <div class="fields">
+    <%= f.label :first_szene_desc %><br>
+    <%= f.text_field :first_szene_desc %>
+  </div>
+
+  <div class="fields">
+    <%= f.label :moral %><br>
+    <%= f.text_field :moral %>
+  </div>
+
+  <div class="fields">
+    <%= f.label :keywords %><br>
+    <%= f.text_field :keywords %>
+  </div>
+
+  <%= f.submit %> | <%= link_to "Zurück ohne Speichern", :back %>
+
+<% end %>

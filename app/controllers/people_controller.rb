@@ -1,5 +1,13 @@
 class PeopleController < ApplicationController
   
+  def index
+    @people=Person.where("name like ?", "%#{params[:q]}%")
+    respond_to do |format|
+      format.html
+      format.json{render :json=>@people.map(&:attributes)}
+    end
+  end
+    
   def show
     @person=Person.find(params[:id])
   end
@@ -17,7 +25,7 @@ class PeopleController < ApplicationController
   def create
     new_person(params[:person])
     if @person.save
-      
+      redirect_to :back
     else
       render :action=>:edit
     end
@@ -26,10 +34,10 @@ class PeopleController < ApplicationController
   def update
     @person=Person.find(params[:id])
     if @person.update_attributes(params[:person])
-         redirect_to videos_showmy_path
-      else
-         render :action => 'edit'
-      end
+       redirect_to videos_showmy_path
+    else
+       render :action => 'edit'
+    end
   end
   
   

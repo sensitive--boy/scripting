@@ -1,0 +1,18 @@
+<div class='menue'>
+	<%= link_to 'meine Daten', edit_person_path(current_user.person) %>
+    </div>
+    <div class='menue'>
+      <%= link_to 'alle Beiträge', videos_path %>
+    </div>
+    <div class='menue'>
+      <%= link_to 'alle Sendungen', shows_path %>
+    </div>
+    <div class='menue'>
+      <%= link_to 'Beitrag anlegen', new_video_path %>
+    </div>
+
+  <% if current_user.advisor? %>
+    <div class='menue'>
+      <%= link_to 'Sendung anlegen', new_show_path %>
+    </div>
+  <% end %>

@@ -1,0 +1,4 @@
+class AddTakeIdToAddresses < ActiveRecord::Migration
+  def change
+  end
+end

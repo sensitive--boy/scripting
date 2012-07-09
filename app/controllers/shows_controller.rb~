@@ -1,7 +1,7 @@
 class ShowsController < ApplicationController
   
   def index
-    @shows=Show.all
+    @shows=Show.search(params[:search]).paginate(:per_page => 5, :page => params[:page])
   end
 
   def new

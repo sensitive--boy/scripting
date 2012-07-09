@@ -7,8 +7,8 @@
 </div>
 
 <div class="field">
-<%= f.label :format %>
-<%= f.text_field :format %>
+  <%= f.label :format %>
+  <%= f.select :format, Viedo::FORMATS, :prompt=>"Bitte wählen" %>
 </div>
 
 <div class="field">
@@ -18,11 +18,11 @@
 
 <div class="field">
 <%= f.label :summary %>
-<%= f.text_area :title %>
+<%= f.text_area :summary %>
 </div>
 
 <div class="field">
-<%= f.label "responsable Person: " %><%= @video.user.person.firstname %> <%= @video.user.person.name %>
+<%= f.label "responsable Person: " %><%= @video.user.person.name %>
 </div>
 
 <%= f.submit %>

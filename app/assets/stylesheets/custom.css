@@ -1,9 +1,12 @@
 .container {
-  width: 710px;
+
 }
 
 body {
-  background: #fcf;
+  background: #fff;
+}
+table tr {
+    padding: 20px;
 }
 
 header {
@@ -32,10 +35,12 @@ footer {
   width: 710px;
   margin-left: auto;
   margin-right: auto;
+  background: #ccc;
 }
 
 footer nav {
   float: none;
+  background: #ccc;
 }
 
 /* navigation */

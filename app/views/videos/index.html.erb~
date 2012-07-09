@@ -1,7 +1,30 @@
 <h1>Videos#index</h1>
-<ul>
+<%= form_tag videos_path, :method => 'get', :id => "videos_search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :title => nil %>
+  </p>
+<table>
+<tr>
+<th>Title</th>
+<th>Created by</th>
+<th>Format</th>
+<th>Duration</th>
+<th>Status</th>
+</tr>
 <%= @videos.each do |video| %>
-  <li><%= video.title %> --- <%= video.format %> --- <%= video.duration %> --- <%= video.user.person.firstname %> <%= video.user.person.name %> --- status</li>
+  <tr>
+    <td><%= video.title %></td>
+    <td><%= video.user.person.name %></td>
+    <td><%= video.format %></td>
+    <td><%= video.duration %></td>
+    <td>status</td>
+  </tr>
+  <tr><td colspan="4"><%= video.summary %></td></tr>
 <% end %>
-</ul>
+</table>
+<%= will_paginate @videos %>
+<% end %>
+
+<%= link_to 'back', videos_showmy_path %>
 

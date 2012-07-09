@@ -1,42 +1,31 @@
 <h1>Videos#showmy</h1>
-<div class='menue'>
-  <%= link_to 'meine Daten', edit_person_path(current_user.person) %>
-</div>
-<div class='menue'>
-  <%= link_to 'alle Beiträge', videos_path %>
-</div>
-<div class='menue'>
-  <%= link_to 'alle Sendungen', shows_path %>
-</div>
-<div class='menue'>
-  <%= link_to 'Beitrag anlegen', new_video_path %>
-</div>
-
-
-<% if current_user.advisor? %>
-  <div class='menue'>
-    <%= link_to 'Sendung anlegen', new_show_path %>
+<div class="row-fluid">
+  <div class="span2">
+    <%= render :partial => 'left_menue' %>
   </div>
 
-  <div class='table'>
-    <h3>Meine Sendungen</h3>
-    <table>
-      <tr>
-	<th>Titel</th>
-	<th>Thema</th>
-	<th>Sendedatum</th>
-	<th>Status</th>
-      </tr>
-      <% @shows.each do |show| %>
-	<tr>
-	  <td><%= show.title %></td>
-	  <td><%= show.toppic %></td>
-	  <td><%= show.date %></td>
-	  <td></td>
-	</tr>
-      <% end %>
-    </table>
-<% end %>
+  <div class="span10">
+    <% if current_user.advisor? %>
+      <div class='table'>
+	<h3>Meine Sendungen</h3>
+	<table>
+	  <tr>
+	    <th>Titel</th>
+	    <th>Thema</th>
+	    <th>Sendedatum</th>
+	    <th>Status</th>
+	  </tr>
+	  <% @shows.each do |show| %>
+	  <tr>
+	    <td><%= show.title %></td>
+	    <td><%= show.toppic %></td>
+	    <td><%= show.date %></td>
+	    <td></td>
+	  </tr>
+	  <% end %>
+	  </table>
+    <% end %>
+    </div>
 
 <div class='table'>
   <h3>Meine Beiträge</h3>
@@ -49,10 +38,13 @@
     </tr>
     <% @videos.each do |video| %>
       <tr>
-	<td><%= video.title %></td>
-	<td><%= video.user.person.firstname %><%= video.user.person.name %></td>
+	<td><%= link_to video.title, edit_video_path(video) %></td>
+	<td><%= video.user.person.name %></td>
 	<td>-</td>
 	<td></td>
       </tr>
     <% end %>
-  </table>
+    </table>
+    </div>
+  </div>
+</div>

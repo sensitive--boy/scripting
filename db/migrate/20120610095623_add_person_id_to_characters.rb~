@@ -1,0 +1,4 @@
+class AddPersonIdToCharacters < ActiveRecord::Migration
+  def change
+  end
+end
