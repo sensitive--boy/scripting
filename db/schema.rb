@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120707100332) do
+ActiveRecord::Schema.define(:version => 20120720135344) do
 
   create_table "addresses", :force => true do |t|
     t.string   "venue"
@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(:version => 20120707100332) do
     t.integer  "person_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "take_id"
   end
 
   add_index "addresses", ["person_id"], :name => "index_addresses_on_person_id"
@@ -87,13 +86,21 @@ ActiveRecord::Schema.define(:version => 20120707100332) do
     t.string   "messenger"
     t.integer  "user_id"
     t.integer  "admin_id"
-    t.integer  "video_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   add_index "people", ["admin_id"], :name => "index_people_on_admin_id"
   add_index "people", ["user_id"], :name => "index_people_on_user_id"
+
+  create_table "pictures", :force => true do |t|
+    t.string   "image"
+    t.integer  "position"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "take_id"
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "role"
@@ -150,6 +157,7 @@ ActiveRecord::Schema.define(:version => 20120707100332) do
     t.integer  "szene_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "address_id"
   end
 
   add_index "takes", ["szene_id"], :name => "index_takes_on_szene_id"
@@ -167,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20120707100332) do
     t.integer  "video_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.string   "updated_by"
   end
 
   add_index "treatments", ["video_id"], :name => "index_treatments_on_video_id"
@@ -186,6 +195,8 @@ ActiveRecord::Schema.define(:version => 20120707100332) do
     t.datetime "updated_at",                                :null => false
     t.string   "username"
     t.boolean  "advisor",                :default => false
+    t.integer  "video_id"
+    t.integer  "show_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

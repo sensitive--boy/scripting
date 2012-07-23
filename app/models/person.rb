@@ -10,4 +10,7 @@ class Person < ActiveRecord::Base
   validates :email, :presence=>{:message=>"You need to fill in at least one contact possibility"}, :unless=>lambda {self.phone.present? || self.mobile.present? || self.messenger.present?}
   
   accepts_nested_attributes_for :address
+  
+ scope :are_advisor, joins(:user) & User.all_advisors 
+
 end

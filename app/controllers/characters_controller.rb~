@@ -1,13 +1,17 @@
 class CharactersController < ApplicationController
-  autocomplete :person, :name, :full=>true, :extra_data=>[:id]
+  autocomplete :person, :name, :full=>true
   
-  def autocomplete_person_name
-    @people = Person.find(:all, :order => 'name ASC')
+  def create
+    @character = Character.new(:charactername => params[:character][:charactername], :person => Person.find_by_name(params[:character][:person]), :video_id => params[:treatment][:video_id])
 
-    re = Regexp.new("^#{params[:character][:person_name]}", "i")
-    @pers = @people.find_all do |t|
-      t.name.match re
+    respond_to do |format|
+      if @role.save
+        format.html { redirect_to(edit_video_path(:id => @role.video_id), :notice => 'Role was successfully updated.')  }
+        format.xml  { render :xml => @role, :status => :created, :location => @role }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @role.errors, :status => :unprocessable_entity }
+      end
     end
-
   end
 end

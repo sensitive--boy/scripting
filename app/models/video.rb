@@ -1,6 +1,7 @@
 class Video < ActiveRecord::Base
   belongs_to :user
   belongs_to :show
+  has_one :advisor, :class_name => "User", :foreign_key => "video_id"
   has_many :roles
   has_many :people, :through=>:roles
   has_many :sequences, :order=>"position", :dependent=>:destroy
@@ -9,7 +10,7 @@ class Video < ActiveRecord::Base
   has_many :media_files, :through=>:szenes
   has_many :audiotracks, :through=>:szenes
   has_one :treatment, :dependent=>:destroy
-  attr_accessible :duration, :format, :show_id, :summary, :supposed_duration, :title, :treatment_attributes, :roles, :roles_attributes
+  attr_accessible :duration, :format, :show_id, :summary, :supposed_duration, :title, :treatment_attributes, :roles, :roles_attributes, :advisor
   
   accepts_nested_attributes_for :roles
   accepts_nested_attributes_for :people
@@ -38,7 +39,13 @@ class Video < ActiveRecord::Base
     end
   end
 
-
+  def build_script
+    self.sequences.build(:video_id=>self.id, :name=>'Beispielsequenz').insert_at
+    szene=Szene.create(:sequence_id=>self.sequences.first.id, :title=>'Beispielszene', :place=>"Am Flussufer, zwischen grossen Baeumen", :description=>"Person sitzt am Ufer, schaut in den Fluss und kaut einen Grashalm.")
+    szene.insert_at
+    take=Take.create(:szene_id=>szene.id, :view_desc=>"Totale, Flussufer mit hohen Baeumen", :audio_desc=>"Vogelzwischern, Wasserrauschen, Blaetterrascheln", :duration=>3000, :note=>"Person befindet sich bereits im Bild, ist jedoch kaum zu sehen.")
+    take.insert_at
+  end
   
   private
   #def build_script

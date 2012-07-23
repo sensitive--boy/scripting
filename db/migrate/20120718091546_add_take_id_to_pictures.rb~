@@ -1,0 +1,4 @@
+class AddTakeIdToPictures < ActiveRecord::Migration
+  def change
+  end
+end

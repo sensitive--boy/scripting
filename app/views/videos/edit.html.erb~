@@ -2,12 +2,14 @@
   <div class="span2">
   </div>
   <div class="span10">
-<%= form_for @video do |f| %>
+<%= nested_form_for @video do |f| %>
 <h1><%= @video.title %></h1>
 
-<% if current_user=@video.user %>
+<div class="fields">
+<% if current_user==@video.user %>
   <%= link_to 'Video löschen', video_path(@video), :method=>:delete, :confirm => 'Are you sure?' %>
 <% end %>
+</div>
 
 <div class="fields">
 <%= f.label :format %>
@@ -20,34 +22,57 @@
 <% end %>
 </div>
 <div class="fields">
-<%= f.label :supposed_duration %>
-<%= f.number_field :supposed_duration %> /
-<%= f.label :duration %>
-<%= @video.duration %>
+  <%= f.label :supposed_duration %>
+  <%= f.number_field :supposed_duration %> /
+  <%= f.label :duration %>
+  <%= @video.duration %>
 </div>
 <div class="fields">
 <%= f.label 'responsible Person' %>
 <%= @video.user.person.name %>
 </div>
+<div class="fields">
+  <% if @video.advisor %>
+      <%= @video.advisor.person.name %>
+  <% else %>
+      <%= f.collection_select :advisor, Person.joins(:user).where('user.advisor?' => true), :user_id, :name, :promt => "Select Advisor" %>
+  <% end %>
+</div>
 
+<div class="summary">
 <section>
 <%= f.label :summary %><br>
 <%= @video.summary %>
 </section>
+</div>
 
-
-<%= link_to "Treatment bearbeiten", edit_treatment_path(:video_id=>@video.id) %> zuletzt bearbeitet: <%= @video.treatment.updated_at %> von: <br>
+<%= link_to "Treatment bearbeiten", edit_treatment_path(:video_id=>@video.id) %> zuletzt bearbeitet: <%= @video.treatment.updated_at %> von: <%= @video.treatment.updated_by %><br>
+<div id="people">
 <section>
 Mitwirkende:<br>
-<div id="people">
-  <%= render :partial=>'people_roles', :locals=>{:f=>f} %>
-  <%= link_to "person hinzufügen", add_role_video_path, :method=>:put %>
-</div>
+  <ul>
+    <li>Besitzer: <%= @video.user.person.name %></li>
+  <% @video.roles.each do |role| %>
+    <% if role.role? %>
+      <li><%= role.role %>: <%= role.person.name %>
+      <% if current_user==@video.user %>
+	 -- <%= link_to "barbeiten", edit_role_path(role) %> -- <%= link_to "Löschen", role_path(role.id), method: :delete %>
+      <% end %></li>
+    <% end %>
+  <% end %>
+  </ul>
+  <% if current_user==@video.user %>
+    <%= link_to "person hinzufügen", new_role_path(:video_id => @video.id) %>
+  <% end %>
 </section>
+</div>
+<div>
 <%= link_to "Script bearbeiten", script_videos_path(:id=>@video.id) %> zuletzt bearbeitet: <%= @video.updated_at %> von: <br>
 <%= link_to "Drehplan zeigen", takes_path(@video) %><br>
-<hr>
+</div>
+<section>
 Technik:
+</section>
 <div>
 <%= f.submit %> | <%= link_to "Zurück ohne speichern", videos_showmy_path %>
 </div>

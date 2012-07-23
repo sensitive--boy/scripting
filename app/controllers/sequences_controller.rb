@@ -35,7 +35,7 @@ class SequencesController < ApplicationController
    # POST /sequences.xml
   def create
     @sequence = Sequence.new(params[:sequence])
-    @sequence.video= Video.find(params[:video_id])
+    @sequence.video= Video.find(params[:sequence][:video_id])
     puts "----- in der naechsten Zeile sollte der name des Videos stehen -----"
     puts @sequence.video.title
     puts params[:sequence][:name]

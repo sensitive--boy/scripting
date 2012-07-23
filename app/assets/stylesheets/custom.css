@@ -1,3 +1,68 @@
+.brand h1{
+  color: #f60;
+}
+.navbar {
+  background: #f93;
+}
+.navbar a {
+  color: #fff;
+}
+.navbar a:visited {
+  color: #000;
+}
+.navbar a:hover {
+  color: #f60;
+}
+.menue {
+  margin-left: 0px;
+  margin-top: 3px;
+  padding: 10px 15px 7px 20px;
+  background: #f93;
+  font-weight: bold;
+}
+.menue a {
+  color: white;
+  font-size: 110%;
+}
+.menue a:visited {
+  color: black;
+}
+.menue a:hover {
+  color: #f60;
+  text-decoration: none;
+}
+.fields label {
+  font-weight: bold;
+}
+.summary section {
+  padding-top: 7px;
+  padding-left: 5px;
+  background: #fb6;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+.summary section label {
+  font-weight: bold;
+}
+section {
+  padding-top: 7px;
+  padding-left: 5px;
+  background: #ccc;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+.span10 {
+  margin-bottom: 35px;
+}
+.span10 a:visited {
+  color: #f60;
+}
+.span10 a {
+  color: #f60;
+}
+.span10 a:hover {
+  color: #c30;
+}
 .container {
 
 }
@@ -18,12 +83,6 @@ header img {
   background: #fff;
 }
 
-section {
-  margin-top: 1em;
-  font-size: 120%;
-  padding: 20px;
-  background: #fff;
-}
 
 section h1 {
   font-size: 200%;
@@ -35,11 +94,6 @@ footer {
   width: 710px;
   margin-left: auto;
   margin-right: auto;
-  background: #ccc;
-}
-
-footer nav {
-  float: none;
   background: #ccc;
 }
 
@@ -85,20 +139,4 @@ nav ul li a:hover {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px
-}
-
-/* links */
-
-a {
-  color: #09c;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #069;
-  text-decoration: underline;
-}
-
-a:visited {
-  color: #069;
 }

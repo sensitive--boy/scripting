@@ -36,7 +36,7 @@
       <th>Sendung</th>
       <th>Status</th>
     </tr>
-    <% @videos.each do |video| %>
+    <% @allmyvideos.each do |video| %>
       <tr>
 	<td><%= link_to video.title, edit_video_path(video) %></td>
 	<td><%= video.user.person.name %></td>

@@ -19,6 +19,12 @@
     <% end %>
 <hr>
     Bilder:
+    <% @take.pictures.each do |pic| %>
+      <div class="picture">
+	<%= image_tag pic.image_url(:thumb) if pic.image? %><br>
+	<%= pic.description %>
+      </div>
+    <% end %>
 <hr>
     Note:<br>
     <%= @take.note %>

@@ -4,10 +4,9 @@
       <%= f.select :role, Role::ROLES, :prompt=>"Bitte wählen" %>
   </td>
   <td>
-      <%= f.label :person_tokens, "Person" %>
-      <%= f.select :person_id, @people %>
+      <%= f.autocomplete_field :person, autocomplete_person_name_roles_path %>
   </td>
   <td>
-      <%= video_link_to_remove_fields "entfernen", f %>
+      <%= f.link_to_remove "Remove this task" %>
   </td>
 </tr>

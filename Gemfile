@@ -8,6 +8,10 @@ gem 'acts_as_list'
 
 gem 'sqlite3'
 gem 'rails3-jquery-autocomplete'
+gem "rmagick"
+gem "mini_magick"
+gem "carrierwave"
+gem "nested_form"
 
 
 # Gems used only for assets and not required

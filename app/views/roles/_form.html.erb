@@ -1,0 +1,15 @@
+<%= form_for @role do |f| %>
+  <div class="fields">
+    <%= f.label :role %>
+    <%= f.select :role, Role::ROLES, :prompt=>"Bitte wählen" %>
+  </div>
+
+  <div class="fields">
+    <%= f.label :person %>
+    <%= f.autocomplete_field :person, autocomplete_person_name_roles_path %>
+  </div>
+
+  <%= f.hidden_field :video_id %>
+
+  <%= f.submit %>
+<% end %>

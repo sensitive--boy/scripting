@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
-  autocomplete :person, :name, :full => true
+  autocomplete :person, :name, :full => true, :extra_data => [:user_id]
+  
   def new
     @video=Video.new
     @video.user=current_user
@@ -7,25 +8,24 @@ class VideosController < ApplicationController
 
   def edit
     @video = Video.find(params[:id])
-    @video.treatment ||= Treatment.new(:id=>@video.id)
+    @video.treatment ||= Treatment.new(:video_id=>@video.id)
     @video.roles.build if @video.roles.empty?
     puts "edit"
     puts @video.roles.count
-    @people=Person.all.map {|p| [p.name, p.id]}
-    puts @people.count
   end
   
   def update
     @video = Video.find(params[:id])
     puts "update"
     puts @video.people.count
-    @video.roles.each do
-      
-    @role = Role.create(:role=>params[:video][:roles_attributes][:id][:role], :person_id=>params[:video][:roles_attributes][:id][:person_id])
+    puts @video.roles.count
+    @video.roles.each do |role|
+      role.update_attributes(:role => params[:role], :person => params[:person])
     end
     #if @video.update_attributes(params[:video])
      # redirect_to videos_showmy_path
     #else
+        puts @video.roles.count
       render :action => :edit
    # end
   end
@@ -38,6 +38,16 @@ class VideosController < ApplicationController
   def showmy
     @videos=current_user.videos
     @shows=current_user.shows
+    @other_videos=[]
+    Role.where(:person_id => current_user.person.id).each do |role|
+      @other_videos << role.video
+    end
+    @allmyvideos=(@videos+@other_videos).uniq
+    puts @videos.count
+    puts "+"
+    puts @other_videos.count
+    puts "="
+    puts @allmyvideos.count
   end
 
   def index
@@ -47,11 +57,11 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(params[:video])
     @video.user=current_user
-    build_script(@video)
+    @video.treatment=Treatment.new(:video_id=>@video.id)
+    @video.build_script
     if @video.save
       @title=@video.title
       puts 'save: %1$s' % [@title]
-      @people=Person.all.map {|p| [p.name, p.id]}
       redirect_to videos_showmy_path(@video.user)
     else
       render :action => "new"
@@ -61,7 +71,7 @@ class VideosController < ApplicationController
   def destroy
     @video = Video.find(params[:id])
     @video.destroy
-    redirect_to :back
+    redirect_to videos_showmy_path(@video.user)
   end
   
   def script
@@ -80,9 +90,10 @@ class VideosController < ApplicationController
   end
   
   private
-  def build_script(video)
+  def build_script
+    @video.sequences.build
     seq=Sequence.create(:video_id=>@video.id, :name=>'Sequence 1')
-    @video.sequences << seq
+    seq.insert_at
     szene=Szene.create(:sequence_id=>seq.id, :title=>'Example Szene', :place=>"Am Flussufer, zwischen grossen Baeumen", :description=>"Person sitzt am Ufer, schaut in den Fluss und kaut einen Grashalm.")
     szene.insert_at
     take=Take.create(:szene_id=>szene.id, :view_desc=>"Totale, Flussufer mit hohen Baeumen", :audio_desc=>"Vogelzwischern, Wasserrauschen, Blaetterrascheln", :duration=>3000, :note=>"Person befindet sich bereits im Bild, ist jedoch kaum zu sehen.")

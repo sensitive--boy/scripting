@@ -1,6 +1,6 @@
 Scripting::Application.routes.draw do
 
-  match '/autocomplete/people' => "autocomplete#people"
+  #match '/autocomplete/people' => "autocomplete#people"
   get "videos/showmy"
   
   get "admin/admin/administrate_users"
@@ -18,8 +18,13 @@ Scripting::Application.routes.draw do
   devise_scope :user do
     resources :shows
     resources :videos do
+      get :autocomplete_person_name, :on => :collection
       get 'script', :on => :collection
       put 'add_role', :on => :member
+    end
+    
+    resources :roles do
+      get :autocomplete_person_name, :on => :collection
     end
     
     resources :treatments
@@ -32,6 +37,8 @@ Scripting::Application.routes.draw do
     end
     
     resources :takes do
+      resources :pictures
+      get :autocomplete_address_address, :on => :collection
       post :sort, :on => :collection
     end
     

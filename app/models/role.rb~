@@ -1,7 +1,7 @@
 class Role < ActiveRecord::Base
   belongs_to :video
   belongs_to :person
-  attr_accessible :role, :person, :video_id
+  attr_accessible :role, :person_id, :video_id
   attr_reader :person_tokens
   
   ROLES=["Kamera", "Regie", "Redaktion", "Schnitt", "Effekte", "Ton", "Beleuchtung", "Animation"]

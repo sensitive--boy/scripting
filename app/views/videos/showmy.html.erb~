@@ -1,10 +1,10 @@
-<h1>Videos#showmy</h1>
 <div class="row-fluid">
   <div class="span2">
     <%= render :partial => 'left_menue' %>
   </div>
 
   <div class="span10">
+    <h1>Videos#showmy</h1>
     <% if current_user.advisor? %>
       <div class='table'>
 	<h3>Meine Sendungen</h3>
@@ -37,6 +37,22 @@
       <th>Status</th>
     </tr>
     <% @videos.each do |video| %>
+      <tr>
+	<td><%= link_to video.title, edit_video_path(video) %></td>
+	<td><%= video.user.person.name %></td>
+	<td>-</td>
+	<td></td>
+      </tr>
+    <% end %>
+    <% @other_videos.each do |video| %>
+      <tr>
+	<td><%= link_to video.title, edit_video_path(video) %></td>
+	<td><%= video.user.person.name %></td>
+	<td>-</td>
+	<td></td>
+      </tr>
+    <% end %>
+<% @allmyvideos.each do |video| %>
       <tr>
 	<td><%= link_to video.title, edit_video_path(video) %></td>
 	<td><%= video.user.person.name %></td>

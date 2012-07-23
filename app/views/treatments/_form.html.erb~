@@ -1,4 +1,4 @@
-<%= form_for @treatment, :url=>video_treatment_path() do |f| %>
+<%= form_for @treatment do |f| %>
 
 <h1>Treatment for <%=@treatment.video.title %></h1>
   <div class="fields">
@@ -7,14 +7,18 @@
   </div>
 
   <div class="fields">
+    <% if @treatment.main_character %>
+      <%= f.label :main_character %>
+      <%= @treatment.main_character.charactername %>: <%= @treatment.main_character.person.name %>
+    <% else %>
     <%= fields_for @treatment.main_character do |char| %>
       <%= char.label :charactername %><br>
       <%= char.text_field :charactername %>
     
       <%= char.label "Person", :person_name %>
-      <%= char.text_field :person_name %>
-      <%= char.hidden_field :person_id %>
+      <%= char.autocomplete_field :person_name, autocomplete_person_name_characters_path %>
       <%= link_to "neue Person anlegen", new_person_path %>
+    <% end %>
     <% end %>
   </div>
 

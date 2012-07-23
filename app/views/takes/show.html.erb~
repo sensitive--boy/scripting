@@ -19,10 +19,16 @@
     <% end %>
 <hr>
     Bilder:
+    <% @take.pictures.each do |pic| %>
+      <div class="picture">
+	<%= image_tag pic.image_url(:thumb) if pic.image? %>
+	<%= pic.description %>
+      </div>
+    <% end %>
 <hr>
     Note:<br>
     <%= @take.note %>
 <hr>
-    <%= link_to "Bearbeiten", edit_take_path(@take) %> | <%= link_to "Zurück zum Script", script_videos_path(@take.video) %>
+    <%= link_to "Bearbeiten", edit_take_path(@take) %> | <%= link_to "Zurück zum Script", :back %>
   </div>
 </div>
