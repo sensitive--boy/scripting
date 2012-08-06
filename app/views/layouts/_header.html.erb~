@@ -16,10 +16,16 @@
 	    <li class="divider-vertical"></li>
             <li><%= link_to "Help", help_path %></li>
 	    <li class="divider-vertical"></li>
+	    <% if technician_signed_in? %>
+	      <li><%= link_to "Sign out", destroy_technician_session_path, :method => :delete %></li>
+	    <% else %>
+	      <li><%= link_to "Tech", new_technician_session_path %></li>
+	    <% end %>
+	    <li class="divider-vertical"></li>
             <% if user_signed_in? %>
 	      <li><p navbar-text>Hey <%= current_user.username %>. Not you? <%= link_to "Sign out", destroy_user_session_path, :method => :delete %></p></li>
 	    <% elsif admin_signed_in? %>
-	      <li><p navbar-text>I trust you, <%= current_admin.username %>. </p><%= link_to "Sign out", destroy_admin_session_path, :method => :delete %></li>
+	      <li><p navbar-text>I trust you, <%= current_admin.username %>. <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %></p></li>
 	    <% else %>
 		<li><%= link_to "Administrate", new_admin_session_path %></li>
 		<li class="divider-vertical"></li>

@@ -1,0 +1,30 @@
+<%= form_for @technical_item, :html => {:multipart => true} do |f| %>
+  <div class="fields">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="fields">
+    <%= f.label :identifier %>
+    <%= f.text_field :identifier %>
+  </div>
+  <div class="fields">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div class="fields">
+    <%= f.label :date_of_purchase %>
+    <%= f.date_select :date_of_purchase %>
+  </div>
+  <div class="fields">
+    <%= f.label :manual %>
+    <%= image_tag(@technical_item.manual_url) if @technical_item.manual? %>
+    <%= f.check_box :remove_manual %>
+    <%= f.label "Remove" %>
+    <%= f.file_field :manual %>
+  </div>
+  <div class="fields">
+    <%= f.label :available %>
+    <%= f.check_box :available %>
+  </div>
+  <%= f.submit %> | <%= link_to "Zurück ohne Speichern", technical_items_path %>
+<% end %>

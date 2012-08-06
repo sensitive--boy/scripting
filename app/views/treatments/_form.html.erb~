@@ -7,7 +7,7 @@
   </div>
 
   <div class="fields">
-    <% if @treatment.main_character %>
+    <% if @treatment.main_character && @treatment.main_character.person %>
       <%= f.label :main_character %>
       <%= @treatment.main_character.charactername %>: <%= @treatment.main_character.person.name %>
     <% else %>
@@ -15,7 +15,7 @@
       <%= char.label :charactername %><br>
       <%= char.text_field :charactername %>
     
-      <%= char.label "Person", :person_name %>
+      <%= char.label "Person", :person %>
       <%= char.autocomplete_field :person_name, autocomplete_person_name_characters_path %>
       <%= link_to "neue Person anlegen", new_person_path %>
     <% end %>
@@ -26,6 +26,19 @@
     <%= f.label :main_characteristic %><br>
     <%= f.text_field :main_characteristic %>
   </div>
+  Charaktere:<br>
+	  <ul>
+	    <% @treatment.characters.each do |character| %>
+	      <% if character.charactername? %>
+		<li>
+		  <%= character.charactername %>: <%= character.person.name %>
+		      -- <%= link_to "barbeiten", edit_character_path(character) %> -- <%= link_to "Löschen", character_path(character.id), method: :delete %>
+		</li>
+	      <% end %>
+	    <% end %>
+	  </ul>
+
+  <%= link_to "Charakter hinzufügen", new_character_path(:treatment_id => @treatment.id) %><br>
 
   <div class="fields">
     <%= f.label :conflict %><br>

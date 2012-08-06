@@ -1,0 +1,31 @@
+<div class="row-fluid">
+  <div class="span2">
+    
+  </div>
+
+  <div class="span10">
+<h1>Übersicht Technische Geräte</h1>
+<table>
+<tr>
+<th>Bezeichnung</th>
+<th>Identifikationsnummer</th>
+<th>Kaufdatum</th>
+<th>Handbuch</th>
+<th>Verfügbar</th>
+<th></th>
+<th></th>
+</tr>
+<% @technical_items.each do |t| %>
+  <tr>
+    <td><%= t.name %></td>
+    <td><%= t.identifier %></td>
+    <td><%= t.date_of_purchase %></td>
+    <td><%= link_to "Handbuch", t.manual_url %></td>
+    <td><%= t.available %></td>
+    <td><%= link_to "Bearbeiten", edit_technical_item_path(t) %></td>
+    <td><%= link_to "Löschen", technical_item_path(t), method: :delete, :confirmation => "Gerät dauerhaft entfernen?" %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to "Neues Gerät anlegen", new_technical_item_path %>
+</div>

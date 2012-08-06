@@ -1,0 +1,29 @@
+<h1>Geräte auswählen</h1>
+  <table>
+    <% @video.chosen_items.each do |item| %>
+    <tr>
+      <td><b><%= item.technical_item.name %></b></td>
+      <td><%= item.technical_item.identifier %></td>
+      <td>
+	    ausgewählt <%= link_to "ändern", discard_item_video_path(:item => item) %>
+     </td>
+    </tr>
+    <tr>
+      <td colspan="3"><%= item.technical_item.description %></td>
+    </tr>
+  <% end %>
+  <% @choosable_items.each do |item| %>
+    <tr>
+      <td><b><%= item.name %></b></td>
+      <td><%= item.identifier %></td>
+      <td>
+	  <%= link_to "auswählen", choose_item_video_path(:item => item) %>
+     </td>
+    </tr>
+    <tr>
+      <td colspan="3"><%= item.description %></td>
+    </tr>
+  <% end %>
+  </table>
+  
+<%= link_to "zurück zum Video", edit_video_path(@video) %>

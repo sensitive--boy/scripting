@@ -6,8 +6,10 @@
   <div class="span10">
     <% if resource_name == :admin %>
       <h2>Sign in as Admin</h2>
+    <% elsif resource_name == :technician %>
+      <h2>Sign in as Technician</h2>
     <% else %>
-      <h2>Sign in</h2>
+      <h2>Sign in as User</h2>
     <% end %>
 
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>

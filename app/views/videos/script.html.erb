@@ -8,11 +8,11 @@
 <!-- Body -->
 
 <br><br>
-    <ul id="sequences">
+    <ol id="sequences">
     <% @video.sequences.each do |sequence| %>
         <%= render :partial => "sequences/sequence", :locals=>{:sequence=>sequence} %>
     <% end %>
-    </ul>
+    </ol>
 <br>
 <hr>
 <%= link_to 'neue Sequenz anlegen', new_sequence_path(:video_id => @video.id) %>

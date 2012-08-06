@@ -4,7 +4,7 @@
   </div>
 
   <div class="span10">
-    <h1>Videos#showmy</h1>
+
     <% if current_user.advisor? %>
       <div class='table'>
 	<h3>Meine Sendungen</h3>
@@ -16,35 +16,38 @@
 	    <th>Status</th>
 	  </tr>
 	  <% @shows.each do |show| %>
-	  <tr>
-	    <td><%= show.title %></td>
-	    <td><%= show.toppic %></td>
-	    <td><%= show.date %></td>
-	    <td></td>
-	  </tr>
+	    <tr>
+	      <td><%= show.title %></td>
+	      <td><%= show.toppic %></td>
+	      <td><%= show.date %></td>
+	      <td></td>
+	    </tr>
 	  <% end %>
-	  </table>
+	</table>
+      </div>
     <% end %>
-    </div>
 
-<div class='table'>
-  <h3>Meine Beiträge</h3>
-  <table>
-    <tr>
-      <th>Titel</th>
-      <th>verantwortlich</th>
-      <th>Sendung</th>
-      <th>Status</th>
-    </tr>
-    <% @allmyvideos.each do |video| %>
-      <tr>
-	<td><%= link_to video.title, edit_video_path(video) %></td>
-	<td><%= video.user.person.name %></td>
-	<td>-</td>
-	<td></td>
-      </tr>
-    <% end %>
-    </table>
+
+    <div class='table'>
+      <h3>Meine Beiträge</h3>
+      <table>
+	<tr>
+	  <th>Titel</th>
+	  <th>verantwortlich</th>
+	  <th>Sendung</th>
+	  <th>Status</th>
+	</tr>
+	<% @allmyvideos.each do |video| %>
+	  <% if video %>
+	    <tr>
+	      <td><%= link_to video.title, edit_video_path(video) %></td>
+	      <td><%= video.user.person.name %></td>
+	      <td>-</td>
+	      <td></td>
+	    </tr>
+	  <% end %>
+	<% end %>
+      </table>
     </div>
   </div>
 </div>

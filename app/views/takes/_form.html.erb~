@@ -42,7 +42,7 @@
 <div class="fields">
     <%= f.label :address %>
     <% if @take.address %>
-      <%= @take.address.venue %>
+      <%= @take.address.venue %>: <%= @take.address.address %> | 
       <%= link_to "Adresse neu wählen", edit_take_path(@take, @take.address=nil) %>
     <% else %>
       <%= f.autocomplete_field :address_id, autocomplete_address_address_takes_path %> | <%= link_to "neue Adresse anlegen", new_address_path(@take) %>

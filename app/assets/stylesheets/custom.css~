@@ -51,6 +51,9 @@ section {
   margin-top: 8px;
   margin-bottom: 10px;
 }
+.span10 {
+  margin-bottom: 35px;
+}
 .span10 a:visited {
   color: #f60;
 }
@@ -67,8 +70,26 @@ section {
 body {
   background: #fff;
 }
+table th{
+ padding: 10px; 
+}
 table tr {
-    padding: 20px;
+    padding: 10px;
+}
+table td {
+    padding: 10px;
+}
+
+textarea {
+  width: 80%;
+}
+
+label {
+  margin-top: 30px;
+}
+
+input{
+ margin-top: -10px; 
 }
 
 header {

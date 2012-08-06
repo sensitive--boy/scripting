@@ -6,3 +6,7 @@ en:
     attributes:
       user:  
         login: "Username or email"
+
+    time:
+      formats:
+        videotime: "%M:%S"

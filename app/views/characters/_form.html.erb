@@ -1,0 +1,15 @@
+<%= form_for @character do |f| %>
+  <div class="fields">
+    <%= f.label :charactername %>
+    <%= f.text_field :charactername %>
+  </div>
+
+  <div class="fields">
+    <%= f.label :person %>
+    <%= f.autocomplete_field :person_id, autocomplete_person_name_characters_path %>
+  </div>
+
+  <%= f.hidden_field :treatment_id %>
+
+  <%= f.submit %>
+<% end %>

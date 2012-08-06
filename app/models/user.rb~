@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
    # puts "advisor should be false now"
    # puts advisor?
   end
+  
+  def self.all_advisors
+    where(:advisor == true)
+  end
       
 
 

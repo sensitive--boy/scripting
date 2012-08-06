@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120720135344) do
+ActiveRecord::Schema.define(:version => 20120806194042) do
 
   create_table "addresses", :force => true do |t|
     t.string   "venue"
@@ -67,6 +67,16 @@ ActiveRecord::Schema.define(:version => 20120720135344) do
   end
 
   add_index "characters", ["treatment_id"], :name => "index_characters_on_treatment_id"
+
+  create_table "chosen_items", :force => true do |t|
+    t.integer  "technical_item_id"
+    t.integer  "video_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "chosen_items", ["technical_item_id"], :name => "index_chosen_items_on_technical_item_id"
+  add_index "chosen_items", ["video_id"], :name => "index_chosen_items_on_video_id"
 
   create_table "media_files", :force => true do |t|
     t.string   "description"
@@ -124,6 +134,14 @@ ActiveRecord::Schema.define(:version => 20120720135344) do
 
   add_index "sequences", ["video_id"], :name => "index_sequences_on_video_id"
 
+  create_table "serials", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.boolean  "for_shows",   :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
   create_table "shows", :force => true do |t|
     t.datetime "date"
     t.string   "title"
@@ -132,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20120720135344) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "serial_id"
   end
 
   add_index "shows", ["user_id"], :name => "index_shows_on_user_id"
@@ -144,6 +163,7 @@ ActiveRecord::Schema.define(:version => 20120720135344) do
     t.integer  "sequence_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "props"
   end
 
   add_index "szenes", ["sequence_id"], :name => "index_szenes_on_sequence_id"
@@ -161,6 +181,36 @@ ActiveRecord::Schema.define(:version => 20120720135344) do
   end
 
   add_index "takes", ["szene_id"], :name => "index_takes_on_szene_id"
+
+  create_table "technical_items", :force => true do |t|
+    t.string   "name"
+    t.string   "identifier"
+    t.text     "description"
+    t.boolean  "available"
+    t.string   "manual"
+    t.datetime "date_of_purchase"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "technicians", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "username"
+  end
+
+  add_index "technicians", ["email"], :name => "index_technicians_on_email", :unique => true
+  add_index "technicians", ["reset_password_token"], :name => "index_technicians_on_reset_password_token", :unique => true
 
   create_table "treatments", :force => true do |t|
     t.text     "text"
@@ -212,6 +262,9 @@ ActiveRecord::Schema.define(:version => 20120720135344) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.integer  "user_id"
+    t.integer  "serial_id"
+    t.integer  "advisor_id"
+    t.text     "comments"
   end
 
 end

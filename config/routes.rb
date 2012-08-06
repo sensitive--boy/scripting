@@ -1,5 +1,6 @@
 Scripting::Application.routes.draw do
 
+
   #match '/autocomplete/people' => "autocomplete#people"
   get "videos/showmy"
   
@@ -11,7 +12,10 @@ Scripting::Application.routes.draw do
   
   resources :people
   resources :addresses
+  resources :technical_items
+  resources :serials
 
+  devise_for :technicians
   devise_for :admins
   devise_for :users, :path_names => { :sign_up => "register" }
   
@@ -19,15 +23,23 @@ Scripting::Application.routes.draw do
     resources :shows
     resources :videos do
       get :autocomplete_person_name, :on => :collection
-      get 'script', :on => :collection
+      get 'script', :on => :member
+      get 'contacts', :on => :member
+      get 'remove_item', :on => :collection
+      get 'select_item', :on => :member
+      get 'choose_item', :on => :member
+      get 'discard_item', :on => :member
       put 'add_role', :on => :member
+      put 'add_item', :on => :member
     end
     
     resources :roles do
       get :autocomplete_person_name, :on => :collection
     end
     
-    resources :treatments
+    resources :treatments do
+      get :autocomplete_person_name, :on => :collection
+    end
     resources :sequences do
       post 'sort', :on => :collection
     end
@@ -53,6 +65,7 @@ Scripting::Application.routes.draw do
   # redirect after sign_up
   match 'dashboard' => 'application#personalize', :as => 'user_root'
   match 'administrate' => 'admin/admin#administrate', :as => 'admin_root'
+  match 'techsupport' => 'technical_items#index', :as => 'technician_root'
  
   
   match '/about', :to=>'pages#about'

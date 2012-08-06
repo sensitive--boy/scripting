@@ -21,7 +21,7 @@
     Bilder:
     <% @take.pictures.each do |pic| %>
       <div class="picture">
-	<%= image_tag pic.image_url(:thumb) if pic.image? %>
+	<%= image_tag pic.image_url(:thumb) if pic.image? %><br>
 	<%= pic.description %>
       </div>
     <% end %>
@@ -29,6 +29,6 @@
     Note:<br>
     <%= @take.note %>
 <hr>
-    <%= link_to "Bearbeiten", edit_take_path(@take) %> | <%= link_to "Zurück zum Script", :back %>
+    <%= link_to "Bearbeiten", edit_take_path(@take) %> | <%= link_to "Zurück zum Script", script_video_path(:id => @take.szene.sequence.video.id) %>
   </div>
 </div>

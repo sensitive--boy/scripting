@@ -38,7 +38,7 @@ class SzenesController < ApplicationController
     @szene.sequence.name
     respond_to do |format|
       if @szene.save
-        format.html { redirect_to(script_videos_path(:id => @szene.sequence.video.id), :notice => 'Szene was successfully created.') }
+        format.html { redirect_to(script_video_path(:id => @szene.sequence.video.id), :notice => 'Szene was successfully created.') }
         format.xml  { render :xml => @szene, :status => :created, :location => @szene }
       else
         format.html { render :action => "new" }
@@ -65,7 +65,7 @@ class SzenesController < ApplicationController
 
     respond_to do |format|
       if @szene.update_attributes(params[:szene])
-        format.html { redirect_to(@szene.sequence, :notice => 'Szene was successfully updated.') }
+        format.html { redirect_to(script_videos_path(:id => @szene.sequence.video.id), :notice => 'Szene was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -81,7 +81,7 @@ class SzenesController < ApplicationController
     @szene.destroy
 
     respond_to do |format|
-      format.html { redirect_to(@szene.sequence) }
+      format.html { redirect_to(script_videos_path(:id => @szene.sequence.video.id)) }
       format.xml  { head :ok }
     end
   end

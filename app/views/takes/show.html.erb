@@ -29,6 +29,6 @@
     Note:<br>
     <%= @take.note %>
 <hr>
-    <%= link_to "Bearbeiten", edit_take_path(@take) %> | <%= link_to "Zurück zum Script", :back %>
+    <%= link_to "Bearbeiten", edit_take_path(@take) %> | <%= link_to "Zurück zum Script", script_video_path(@take.szene.sequence.video) %>
   </div>
 </div>

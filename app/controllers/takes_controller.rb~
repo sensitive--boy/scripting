@@ -24,7 +24,6 @@ class TakesController < ApplicationController
   def new
     @take = Take.new(:szene => Szene.find(params[:szene_id]))
     @take.pictures.build
-    #@addresses=Address.all.map {|a| [a.address, a.city, a.id]}
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @take}
@@ -34,7 +33,6 @@ class TakesController < ApplicationController
    # GET /takes/1/edit
   def edit
     @take = Take.find(params[:id])
-    #@addresses=Address.all.map {|a| [a.address, a.city, a.id]}
   end
   
    # POST /takes
@@ -44,7 +42,7 @@ class TakesController < ApplicationController
 
     respond_to do |format|
       if @take.save
-        format.html { redirect_to(script_videos_path(:id => @take.szene.sequence.video.id), :notice => 'Take was successfully updated.') }
+        format.html { redirect_to(script_video_path(:id => @take.szene.sequence.video.id), :notice => 'Take was successfully updated.') }
         format.xml  { render :xml => @take, :status => :created, :location => @take }
       else
         format.html { render :action => "new" }
@@ -68,7 +66,7 @@ class TakesController < ApplicationController
    # PUT /takes/1.xml
   def update
     @take = Take.find(params[:id])
-    @take.address = Address.find_by_id(params[:take][:address_id])
+    @take.address = Address.find_by_address(params[:take][:address_id])
     if params[:pictures][:image]
       @pic=Picture.new(params[:pictures])
       @take.pictures<<@pic

@@ -1,23 +1,33 @@
-<% if resource_name == :admin %>
-<h2>Sign in as Admin</h2>
-<% else %>
-<h2>Sign in</h2>
-<% end %>
+<div class="row-fluid">
+  <div class="span2">
+    
+  </div>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :login %><br />
-  <%= f.text_field :login %></div>
+  <div class="span10">
+    <% if resource_name == :admin %>
+      <h2>Sign in as Admin</h2>
+    <% elsif resource_name == :technician %>
+      <h2>Sign in as Technichian</h2>
+    <% else %>
+      <h2>Sign in as User</h2>
+    <% end %>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div><%= f.label :login %><br />
+      <%= f.text_field :login %></div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+      <div><%= f.label :password %><br />
+      <%= f.password_field :password %></div>
 
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
+      <% if devise_mapping.rememberable? -%>
+	<div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+      <% end -%>
 
-<% if resource_name == :user %>
-<%= render "links" %>
-<% end %>
+      <div><%= f.submit "Sign in" %></div>
+    <% end %>
+
+    <% if resource_name == :user %>
+      <%= render "links" %>
+    <% end %>
+  </div>
+</div>

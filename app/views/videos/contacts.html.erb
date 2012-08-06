@@ -1,0 +1,53 @@
+<div class="row-fluid">
+  <div class="span2">
+  </div>
+  <div class="span10">
+    <h2>Kontaktliste für: <%= @video.title %></h2>
+    <table>
+      <tr>
+	<th>Name</th>
+	<th></th>
+	<th>Mail</th>
+	<th></th>
+	<th>Fon</th>
+	<th></th>
+	<th>Mobil</th>
+	<th></th>
+	<th>Messenger</th>
+      </tr>
+      <tr>
+	<td><b>Verantwortlich:</b></td>
+	<td colspan="8"></td>
+      </tr>
+      <tr>
+	<td><%= @video.user.person.name %></td>
+	<td>--</td>
+	<td><%= @video.user.person.email %></td>
+	<td>--</td>
+	<td><%= @video.user.person.phone %></td>
+	<td>--</td>
+	<td><%= @video.user.person.mobile %></td>
+	<td>--</td>
+	<td><%= @video.user.person.messenger %></td>
+      </tr>
+      <tr>
+	<td><b>Mitwirkende:</b></td>
+	<td colspan="8"></td>
+      </tr>
+      <% @contacts.each do |p| %>
+	  <tr>
+	    <td><%= p.name %></td>
+	    <td>--</td>
+	    <td><%= p.email %></td>
+	    <td>--</td>
+	    <td><%= p.phone %></td>
+	    <td>--</td>
+	    <td><%= p.mobile %></td>
+	    <td>--</td>
+	    <td><%= p.messenger %></td>
+	  </tr>
+      <% end %>
+    </table>
+    <%= link_to "Zurück", :back %>
+  </div>
+</div>

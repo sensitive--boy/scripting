@@ -10,12 +10,16 @@
 </div>
 <div class="fields">
   <%= f.label :description %>
-  <%= f.text_field :description %>
+  <%= f.text_area :description %>
+</div>
+<div class="fields">
+  <%= f.label :props %>
+  <%= f.text_field :props %>
 </div>
 <%= f.hidden_field :sequence_id, :value => @szene.sequence.id %>
 
 <%= link_to "add Audiotrack" %><br>
 <%= link_to "add Media file" %><br>
 
-<%= f.submit %>
+<%= f.submit %> | <%= link_to "Zurück ohne speichern", script_video_path(:id => @szene.sequence.video.id) %>
 <% end %>

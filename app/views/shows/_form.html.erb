@@ -15,6 +15,11 @@
      <%= f.label :toppic %>
      <%= f.text_field :toppic %>
   </div>
+  <div class="fields">
+    <%= f.label "gehört zu Serie" %>
+    <%= f.collection_select :serial_id, Serial.where('for_shows' => true), :id, :title, {:include_blank => true} %> | 
+	<%= link_to "Serie anlegen", new_serial_path %>
+  </div>
   <div>
      <%= f.label 'responsible person' %>
      <%= @person.name %>
@@ -22,5 +27,5 @@
 
 
 
-  <%= f.submit %> | <%= link_to 'back', videos_showmy_path %>
+  <%= f.submit %> | <%= link_to 'zurück ohne Speichern', videos_showmy_path %>
 <% end %>

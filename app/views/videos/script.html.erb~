@@ -6,7 +6,7 @@
 <h1><%= @video.title %></h1>
 
 <!-- Body -->
-<%= link_to 'zurück zum Video', edit_video_path(@video) %>
+
 <br><br>
     <ul id="sequences">
     <% @video.sequences.each do |sequence| %>
@@ -16,5 +16,8 @@
 <br>
 <hr>
 <%= link_to 'neue Sequenz anlegen', new_sequence_path(:video_id => @video.id) %>
+<br>
+<hr>
+<%= link_to 'zurück zum Video', edit_video_path(@video) %>
 </div>
 </div>
