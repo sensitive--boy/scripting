@@ -4,7 +4,7 @@ class Video < ActiveRecord::Base
   belongs_to :user
   belongs_to :show
   belongs_to :serial
-  has_one :advisor, :class_name => "User", :foreign_key => "video_id"
+  belongs_to :advisor, :class_name => "User"
   has_many :roles
   has_many :people, :through=>:roles
   has_many :sequences, :order=>"position", :dependent=>:destroy
@@ -24,15 +24,7 @@ class Video < ActiveRecord::Base
   FORMATS=["Bericht", "Dokumentation", "Interview", "Portrait", "Reportage", "Umfrage", "Kommentar", "Clip", "Kurzfilm", "Spielfilm", "Animationsfilm", "Musikvideo", "Collage", "Experimentalfilm", "Trenner"]
   
   
-  #define_index do
-  #  indexes title
-  #  indexes people.name, :as=>:person_name
-  #  indexes summary
-  #  indexes user
-  #  indexes show
-    
-  #  has created_at
-  #end
+
   
   state_machine do
     state :created #initial state

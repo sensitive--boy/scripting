@@ -24,15 +24,7 @@ class Video < ActiveRecord::Base
   FORMATS=["Bericht", "Dokumentation", "Interview", "Portrait", "Reportage", "Umfrage", "Kommentar", "Clip", "Kurzfilm", "Spielfilm", "Animationsfilm", "Musikvideo", "Collage", "Experimentalfilm", "Trenner"]
   
   
-  #define_index do
-  #  indexes title
-  #  indexes people.name, :as=>:person_name
-  #  indexes summary
-  #  indexes user
-  #  indexes show
-    
-  #  has created_at
-  #end
+
   
   state_machine do
     state :created #initial state
@@ -100,10 +92,7 @@ class Video < ActiveRecord::Base
   
   private
     def propose_idea
-      # mail an self.advisor
-      # Text "beitrag %1 wurde eingereicht", self.title
       self.hint="Bitte warte mit der Bearbeitung des Treatments auf die Freigabe."
-      puts "proposed idea"
     end
     
     def do_accept_idea
