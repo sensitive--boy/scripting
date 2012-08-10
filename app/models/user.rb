@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
   has_one :person
   has_many :videos
   has_many :shows
-  belongs_to :video
   belongs_to :show
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable

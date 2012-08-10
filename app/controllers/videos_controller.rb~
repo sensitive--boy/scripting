@@ -7,7 +7,7 @@ class VideosController < ApplicationController
   end
 
   def edit
-    @video = Video.find(params[:id])
+    find_video
     @video.duration+=@video.takes.sum(:duration)
     @video.treatment ||= Treatment.new(:video_id=>@video.id)
     @video.chosen_items = ChosenItem.where(:video_id => @video.id)
@@ -15,25 +15,23 @@ class VideosController < ApplicationController
   end
   
   def update
-    @video = Video.find(params[:id])
-    @video.advisor ||= User.find(params[:video][:advisor_id])
-    @video.advisor.video_id=@video.id
-    puts "update"
-    puts params[:video][:advisor_id]
-    puts @video.roles.count
-    @video.roles.each do |role|
-      role.update_attributes(:role => params[:role], :person => params[:person])
+    find_video
+    if @video.advisor.nil? && params[:video][:advisor_id]
+      @video.advisor = User.find(params[:video][:advisor_id])
+      @video.advisor.video_id=@video.id
+      @video.propose!
+      VideoMailer.new_video_mail(@video).deliver
     end
+
     if @video.update_attributes(params[:video])
       render :action => :edit
     else
-        puts @video.roles.count
       render :action => :edit
     end
   end
 
   def show
-    @video = Video.find(params[:id])
+    find_video
     @title=@video.title
   end
 
@@ -45,7 +43,8 @@ class VideosController < ApplicationController
       @other_videos << role.video
     end
     @allmyvideos=(@videos+@other_videos).uniq
-    puts @allmyvideos.count
+    
+    @supervised=Video.where('advisor_id' => current_user.id)
   end
 
   def index
@@ -61,24 +60,24 @@ class VideosController < ApplicationController
     @video.build_script
     if @video.save
       @title=@video.title
-      redirect_to videos_showmy_path(@video.user)
+      redirect_to edit_video_path(@video)
     else
       render :action => "new"
     end
   end
   
   def destroy
-    @video = Video.find(params[:id])
+    find_video
     @video.destroy
     redirect_to videos_showmy_path(@video.user)
   end
   
   def script
-    @video = Video.find(params[:id])
+    find_video
   end
   
   def add_role
-    @video = Video.find(params[:id])
+    find_video
     @role=Role.new(:video_id=>@video.id)
     @video.roles<<@role
     
@@ -89,25 +88,35 @@ class VideosController < ApplicationController
   end
   
   def contacts
-    @video = Video.find(params[:id])
+    find_video
     @crewpeople=[]
     @actors=[]
     @video.roles.each do |r|
+    if r.person
       @crewpeople << r.person
+      puts r.person.name
+      end
     end
+    puts @video.roles.count
     @video.treatment.characters.each do |c|
+    if c.person
       @actors << c.person
+      puts c.person.name
+      end
     end
-    @contacts=(@crewpeople+@actors).uniq.order("person.name ASC")
+    puts @video.treatment.characters.count
+    @contacts=(@crewpeople+@actors).uniq
+    puts @contacts.count
+   # @contacts=@contacts.sort_by{|person| person.name}
   end
   
   def select_item
-    @video = Video.find(params[:id])
+    find_video
     find_items
   end
   
   def choose_item
-    @video = Video.find(params[:id])
+    find_video
     @item = ChosenItem.new(:video_id => @video.id, :technical_item_id => params[:item])
     @item.save
     @video.chosen_items << @item
@@ -116,26 +125,62 @@ class VideosController < ApplicationController
   end
   
   def discard_item
-    @video = Video.find(params[:id])
+    find_video
     @video.chosen_items.destroy(params[:item])
     find_items
     render :action => 'select_item'
   end
   
+  def accept_idea
+    find_video
+    @video.accept_idea!
+    redirect_to edit_video_path(@video)
+  end
+  
+  def fin_treat
+    find_video
+    @video.finish_treatment!
+    redirect_to edit_video_path(@video)
+  end
+  
+  def acc_treat
+    find_video
+    @video.accept_treatment!
+    redirect_to edit_video_path(@video)
+  end
+  
+  def fin_prod
+    find_video
+    @video.finish_production!
+    redirect_to edit_video_path(@video)
+  end
+  
+  def acc_prod
+    find_video
+    @video.accept_production!
+    redirect_to edit_video_path(@video)
+  end
+  
+  def fin_vid
+    find_video
+    @video.finish_video!
+    redirect_to edit_video_path(@video)
+  end
+  
+  def arch_vid
+    find_video
+    @video.archivate!
+    redirect_to edit_video_path(@video)
+  end
+  
   private
+  def find_video
+    @video=Video.find(params[:id])
+  end
+  
   def find_items
     @available_items = TechnicalItem.where('available' => true)
     @choosable_items = @available_items - @video.technical_items
   end
   
-  def build_script
-    @video.sequences.build
-    seq=Sequence.create(:video_id=>@video.id, :name=>'Sequence 1')
-    seq.insert_at
-    szene=Szene.create(:sequence_id=>seq.id, :title=>'Example Szene', :place=>"Am Flussufer, zwischen grossen Baeumen", :description=>"Person sitzt am Ufer, schaut in den Fluss und kaut einen Grashalm.")
-    szene.insert_at
-    take=Take.create(:szene_id=>szene.id, :view_desc=>"Totale, Flussufer mit hohen Baeumen", :audio_desc=>"Vogelzwischern, Wasserrauschen, Blaetterrascheln", :duration=>30, :note=>"Person befindet sich bereits im Bild, ist jedoch kaum zu sehen.")
-    take.insert_at
-    @video.treatment=Treatment.new(:video_id=>@video.id)
-  end
 end

@@ -29,6 +29,13 @@ Scripting::Application.routes.draw do
       get 'select_item', :on => :member
       get 'choose_item', :on => :member
       get 'discard_item', :on => :member
+      get 'accept_idea', :on => :member
+      get 'fin_treat', :on => :member
+      get 'acc_treat', :on => :member
+      get 'fin_prod', :on => :member
+      get 'acc_prod', :on => :member
+      get 'fin_vid', :on => :member
+      get 'arch_vid', :on => :member
       put 'add_role', :on => :member
       put 'add_item', :on => :member
     end

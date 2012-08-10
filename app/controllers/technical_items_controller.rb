@@ -1,6 +1,6 @@
 class TechnicalItemsController < ApplicationController
   def index
-    @technical_items = TechnicalItem.all
+    @technical_items = TechnicalItem.paginate :page => params[:page], :per_page => 3, :order => 'name ASC'
   end
   
   def new

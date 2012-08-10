@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806194042) do
+ActiveRecord::Schema.define(:version => 20120809151806) do
 
   create_table "addresses", :force => true do |t|
     t.string   "venue"
@@ -265,6 +265,9 @@ ActiveRecord::Schema.define(:version => 20120806194042) do
     t.integer  "serial_id"
     t.integer  "advisor_id"
     t.text     "comments"
+    t.string   "state"
+    t.string   "hint"
+    t.text     "short_text"
   end
 
 end

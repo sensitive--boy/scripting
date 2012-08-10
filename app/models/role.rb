@@ -4,7 +4,7 @@ class Role < ActiveRecord::Base
   attr_accessible :role, :person_id, :video_id, :person
   attr_reader :person_tokens
   
-  ROLES=["Kamera", "Regie", "Redaktion", "Schnitt", "Effekte", "Ton", "Beleuchtung", "Animation"]
+  ROLES=["Kamera", "Regie", "Redaktion", "Schnitt", "Effekte", "Ton", "Beleuchtung", "Animation", "Mitarbeit"]
   
     
   def person_tokens=(ids)

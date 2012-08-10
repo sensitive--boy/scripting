@@ -1,11 +1,9 @@
 <div class="row-fluid">
   <div class="span2">
-    
   </div>
 
   <div class="span10">
     <h1>Administrate Users</h1>
-
     <table>
       <tr>
 	<th>Name</th>
@@ -16,9 +14,10 @@
 	<th>Delete</th>
       </tr>
 
-    <%= @users.each do |user| %>
-      <%= render 'user', :user=>user %>
-    <% end %>
+      <%= @users.each do |user| %>
+	<%= render :partial => 'user', :locals => {:user => user} %>
+      <% end %>
     </table>
+    <%= will_paginate @users %>
   </div>
 </div>

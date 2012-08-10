@@ -25,29 +25,50 @@
 	  <% end %>
 	</table>
       </div>
-    <% end %>
-
-
-<div class='table'>
-  <h3>Meine Beiträge</h3>
-  <table>
-    <tr>
-      <th>Titel</th>
-      <th>verantwortlich</th>
-      <th>Sendung</th>
-      <th>Status</th>
-    </tr>
-    <% @allmyvideos.each do |video| %>
-      <% if video %>
-      <tr>
-	<td><%= link_to video.title, edit_video_path(video) %></td>
-	<td><%= video.user.person.name %></td>
-	<td>-</td>
-	<td></td>
-      </tr>
-    <% end %>
-  <% end %>
-    </table>
+<hr>
+      <div class='table'>
+	<h3>Beiträge, die ich betreue</h3>
+	<table width="80%">
+	  <tr>
+	    <th>Titel</th>
+	    <th>verantwortlich</th>
+	    <th>Sendung</th>
+	    <th>Status</th>
+	  </tr>
+	  <% @supervised.each do |video| %>
+	    <% if video %>
+	      <tr>
+		<td><%= link_to video.title, edit_video_path(video) %></td>
+		<td><%= video.user.person.name %></td>
+		<td>-</td>
+		<td><%= video.state %></td>
+	      </tr>
+	    <% end %>
+	  <% end %>
+	</table>
+      </div>
+     <% end %>
+<hr>
+    <div class='table'>
+      <h3>Eigene Beiträge</h3>
+      <table width="80%">
+	<tr>
+	  <th>Titel</th>
+	  <th>verantwortlich</th>
+	  <th>Sendung</th>
+	  <th>Status</th>
+	</tr>
+	<% @allmyvideos.each do |video| %>
+	  <% if video %>
+	    <tr>
+	      <td><%= link_to video.title, edit_video_path(video) %></td>
+	      <td><%= video.user.person.name %></td>
+	      <td>-</td>
+	      <td><%= video.state %></td>
+	    </tr>
+	  <% end %>
+	<% end %>
+      </table>
     </div>
   </div>
 </div>

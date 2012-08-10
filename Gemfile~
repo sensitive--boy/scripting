@@ -9,6 +9,7 @@ gem 'acts_as_list'
 gem 'sqlite3'
 gem 'rails3-jquery-autocomplete'
 gem "rmagick"
+gem "mini_magick"
 gem "carrierwave"
 gem "nested_form"
 
@@ -30,7 +31,8 @@ end
 gem 'jquery-rails', '>= 1.0.12'
 gem "devise", ">= 2.0.4"
 gem 'thinking-sphinx', '~> 2.0.12'
-gem 'will_paginate', '~> 3.0'
+gem 'kaminari'
+gem 'will_paginate', '>= 3.0.pre'
 
 
 group :development do

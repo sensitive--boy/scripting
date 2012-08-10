@@ -31,8 +31,20 @@
   color: #f60;
   text-decoration: none;
 }
+.fields {
+
+}
+
 .fields label {
   font-weight: bold;
+}
+.advise {
+  padding: 10px;
+  font-size: 1.3em;
+  font-weight: bold;
+  background: #ccc;
+  border: solid;
+  border-color: #f60;
 }
 .summary section {
   padding-top: 7px;
@@ -66,7 +78,12 @@ section {
 .container {
 
 }
-
+.page {
+  margin: 10px;
+}
+.page current{
+    margin-top: 50px;
+}
 body {
   background: #fff;
 }

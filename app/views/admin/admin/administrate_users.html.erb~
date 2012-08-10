@@ -1,17 +1,23 @@
-<h1>Administrate Users</h1>
+<div class="row-fluid">
+  <div class="span2">
+  </div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th>Email</th>
-    <th></th>
-    <th>Advisor</th>
-    <th>Delete</th>
-  </tr>
+  <div class="span10">
+    <h1>Administrate Users</h1>
+    <table>
+      <tr>
+	<th>Name</th>
+	<th></th>
+	<th>Email</th>
+	<th></th>
+	<th>Advisor</th>
+	<th>Delete</th>
+      </tr>
 
-<%= @users.each do |user| %>
-  <%= render 'user', :user=>user %>
-<% end %>
-</table>
-
+      <%= @users.each do |user| %>
+	<%= render :partial => 'user', :locals => {:user=>user} %>
+      <% end %>
+    </table>
+    <%= will_paginate @users %>
+  </div>
+</div>

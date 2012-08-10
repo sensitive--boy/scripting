@@ -31,7 +31,9 @@ end
 gem 'jquery-rails', '>= 1.0.12'
 gem "devise", ">= 2.0.4"
 gem 'thinking-sphinx', '~> 2.0.12'
-gem 'will_paginate', '~> 3.0'
+gem 'kaminari'
+gem 'will_paginate', '>= 3.0.pre'
+gem "transitions", :require => ["transitions", "active_model/transitions"]
 
 
 group :development do

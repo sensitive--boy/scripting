@@ -8,7 +8,7 @@ class Admin::AdminController < ActionController::Base
   end
   
   def administrate_users
-    @users=User.all
+    @users=User.paginate :page => params[:page], :order => 'created_at ASC', :per_page => 2
   end
   
   def make_advisor
@@ -25,7 +25,12 @@ class Admin::AdminController < ActionController::Base
   
   def destroy_user
     find_user
-    @user.destroy
+    if @user.videos || @user.shows
+      puts "es gibt noch Videos oder Sendungen!!"
+    else
+      
+      @user.destroy
+    end
     show_all_users
   end
   

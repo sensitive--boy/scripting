@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hallo, <%= @video.advisor.person.name %></h1>
+    <p>
+      <%= @person.name %> hat den Beitrag "<%= @video.title %>" angelegt und Dich als Betreuer_in gewählt.<br/>
+    </p>
+    <p>
+      Bitte schau Dir die Idee an und gib sie zur Bearbeitung des Treatments frei oder hinterlasse einen Kommentar mit Verbesserungsvorschlägen.<br/>
+      Zum Einloggen folge diesem Link: <%= @url %>
+    </p>
+    <p>Herzlichen Dank!</p>
+  </body>
+</html>
