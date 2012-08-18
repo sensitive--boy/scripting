@@ -18,8 +18,6 @@ class Video < ActiveRecord::Base
   attr_accessible :duration, :format, :show_id, :summary, :supposed_duration, :title, :treatment_attributes, :roles, :roles_attributes, :advisor, :serial_id, :advisor_id, :chosen_items, :technical_items, :readable_duration, :comments
   
   attr_accessor :readable_duration
-  accepts_nested_attributes_for :roles
-  accepts_nested_attributes_for :people
   
   FORMATS=["Bericht", "Dokumentation", "Interview", "Portrait", "Reportage", "Umfrage", "Kommentar", "Clip", "Kurzfilm", "Spielfilm", "Animationsfilm", "Musikvideo", "Collage", "Experimentalfilm", "Trenner"]
   

@@ -1,1 +1,0 @@
-$("#people").html("<%= escape_javascript(render :partial=>"people_roles", :locales=>{:f=>f}) %>");

@@ -1,7 +1,0 @@
-<table id="people_list">
-    <%= @video.roles.each do |role| %>
-      <%= f.fields_for :roles, role do |per| %>
-	<%= render :partial => 'people_fields', :locals => {:f => per, :role => role} %>
-      <% end %>
-    <% end %>
-</table>

@@ -31,6 +31,7 @@ end
 gem 'jquery-rails', '>= 1.0.12'
 gem "devise", ">= 2.0.4"
 gem 'will_paginate', '>= 3.0.pre'
+gem 'bootstrap-will_paginate'
 gem "transitions", :require => ["transitions", "active_model/transitions"]
 
 

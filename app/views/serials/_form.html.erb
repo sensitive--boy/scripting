@@ -9,6 +9,8 @@
   <%= f.text_area :description %>
 </div>
 
+<%= f.hidden_field :for_shows %>
+
 <%= f.submit %> | <%= link_to "Zurück ohne Speichern", session[:last_page] %>
 
 <% end %>

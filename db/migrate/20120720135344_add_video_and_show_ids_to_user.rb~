@@ -1,4 +1,0 @@
-class AddVideoAndShowIdsToUser < ActiveRecord::Migration
-  def change
-  end
-end

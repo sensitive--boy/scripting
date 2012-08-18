@@ -1,5 +1,5 @@
 class SerialsController < ApplicationController
-  
+  before_filter :authenticate_user!
   def index
     @video_serials = Serial.where(:for_shows == false)
     @show_serials = Serial.where(:for_shows == true)

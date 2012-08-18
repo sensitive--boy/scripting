@@ -1,6 +1,0 @@
-<footer>
-  <div class="navbar navbar-fixed-bottom">
-      <%= link_to "About", about_path %> | <%= link_to "Contact", contact_path %>
-  </div>
-  <%= debug(params) if Rails.env.development? %>
-</footer>

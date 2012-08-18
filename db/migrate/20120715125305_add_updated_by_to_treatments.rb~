@@ -1,4 +1,0 @@
-class AddUpdatedByToTreatments < ActiveRecord::Migration
-  def change
-  end
-end

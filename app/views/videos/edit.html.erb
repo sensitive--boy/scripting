@@ -12,36 +12,13 @@
       </div>
       <br>
       <div class="advise">
-	<% if @video.state == "proposed_idea" && current_user==@video.advisor %>
-	    Bitte gib den Beitrag zur Bearbeitung des Treatments frei. | 
-	  <%= link_to "Freigeben", accept_idea_video_path(@video) %>
-	<% elsif @video.state == "accepted_idea" && current_user!=@video.advisor %>
-	    Zeit, ein Treatment auszuarbeiten!
-	  <%= link_to "Treatment ist fertig.", fin_treat_video_path(@video) %>
-	<% elsif @video.state == "treatment_finished" && current_user==@video.advisor %>
-	  Bitte gib den Beitrag zur Produktion frei oder hinterlasse einen Kommentar. | 
-	  <%= link_to "Freigeben", acc_treat_video_path(@video) %>
-	<% elsif @video.state == "accepted_treatment" && current_user!=@video.advisor %>
-	  Erstelle ein Script und leg los mit der Produktion. | 
-	  <%= link_to "Beitrag ist fertig.", fin_prod_video_path(@video) %>
-	<% elsif @video.state == "production_finished" && current_user==@video.advisor %>
-	  Bitte gib den Beitrag zur Fertigstellung frei. | 
-	  <%= link_to "Freigeben", acc_prod_video_path(@video) %>
-	<% elsif @video.state == "accepted_production" && current_user!=@video.advisor %>
-	  Bitte stell alle Unterlagen zusammen und schreib einen Kurztext zum Beitrag. | 
-	  <%= link_to "Fertig zur Ausstrahlung", fin_vid_video_path(@video) %> 
-	<% elsif @video.state == "video_finished" && current_user==@video.advisor %>
-	  Bitte Sendedatum bzw. Archivnummer eintragen. | 
-	  <%= link_to "Archivieren", arch_vid_video_path(@video) %>
-	<% else %>
-	<%= @video.hint %>
-	<% end %>
+	  <%= raw(state_dependent_hint(@video)) %>
       </div>
 
       <% if @video.state == "accepted_production" %>
 	<div class ="fields">
 	  <%= f.label :short_text %>
-	  <%= t.text_area :short_text, :rows => 10 %>
+	  <%= f.text_area :short_text, :rows => 10 %>
 	</div>
       <% end %>
 
@@ -59,7 +36,9 @@
       <div class="fields">
 	<%= f.label 'ist Teil der Sendung' %>
 	<% if @video.show %>
-	  <%= @video.show.topic %> am <%= @video.show.date %>
+	  "<%= @video.show.title %>" am: <%= l @video.show.date, :format => :g_date %>
+	<% else %>
+	  <%= f.collection_select :show_id, Show.where(["Date >= ?", Date.today]), :id, :toppic, {:include_blank => true} %>
 	<% end %>
       </div>
 
@@ -76,7 +55,7 @@
 
       <div class="fields">
 	<%= f.label "Betreuer wählen" %>
-	<% if @video.advisor_id == nil %>
+	<% if @video.advisor == nil %>
 	  <%= f.collection_select :advisor_id, Person.joins(:user).where('users.advisor' => true), :user_id, :name, {:include_blank => true} %>
 	<% else %>
 	  <%= @video.advisor.person.name %>
@@ -90,7 +69,7 @@
 	</section>
       </div>
 
-      <%= link_to "Treatment bearbeiten", edit_treatment_path(:id => @video.treatment.id) %> zuletzt bearbeitet: <%= @video.treatment.updated_at %> von: <%= @video.treatment.updated_by %><br>
+      <%= link_to "Treatment bearbeiten", edit_treatment_path(:id => @video.treatment.id) %> zuletzt bearbeitet: <%= l @video.treatment.updated_at, :format => :g_datetime %> von: <%= @video.treatment.updated_by %><br>
       <div id="people">
 	<section>
 	  Mitwirkende:<br>
@@ -114,8 +93,8 @@
 	</section>
       </div>
       <div>
-	<%= link_to "Script bearbeiten", script_video_path(:id=>@video.id) %> zuletzt bearbeitet: <%= @video.updated_at %> von: <br>
-	<%= link_to "Drehplan zeigen", takes_path(@video) %><br>
+	<%= link_to "Script bearbeiten", script_video_path(:id=>@video.id) %> zuletzt bearbeitet: <%= l @video.updated_at, :format => :g_datetime %> von: <br>
+	<%= link_to "Drehplan zeigen", takelist_video_path(:video_id => @video.id) %><br>
       </div>
       <section>
 	Technik:
@@ -128,6 +107,7 @@
 	</ul>
 	<%= link_to "Gerät auswählen", select_item_video_path(:id => @video.id) %>
       </section>
+      <%= link_to "Musikliste (Gema-Liste) zeigen", musiclist_video_path(:video_id => @video.id) %><br>
       <div class="fields">
 	<%= f.label "Kommentare und Ideen", :field_name => 'comments' %>
 	<%= f.text_area :comments, :rows => 10 %>

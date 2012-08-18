@@ -1,0 +1,23 @@
+  <table>
+    <tr><th align="left">Audiotitel</th></tr>
+    <tr><td>
+      <% @szene.audiotracks.each do |a| %>
+	<%= a.interpreter %>: <%= link_to a.title, edit_audiotrack_path(a) %> - <%= nice_time(a.fraction_length) %><br>
+      <% end %>
+    </td></tr>
+    <tr><td><%= link_to "add Audiotrack", new_audiotrack_path(:szene_id => @szene.id) %></td></tr>
+    <tr><th align="left">Fremdes Bildmaterial</th></tr>
+    <tr><td>
+      <% @szene.media_files.each do |m| %>
+	<%= link_to m.description, edit_media_file_path(m) %><br>
+      <% end %>
+    </td></tr>
+    <tr><td><%= link_to "add Media file", new_media_file_path(:szene_id => @szene.id) %></td></tr>
+    <tr><th align="left">Bauchbinden</th></tr>
+    <tr><td>
+      <% @szene.infos.each do |i| %>
+	<%= link_to i.name, edit_info_path(i) %> - <%= i.function %><br>
+      <% end %>
+    </td></tr>
+    <tr><td><%= link_to "Bauchbinden-Information hinzufügen", new_info_path(:szene_id => @szene.id) %></td></tr>
+  </table>

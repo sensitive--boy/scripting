@@ -1,0 +1,24 @@
+<div class="row-fluid">
+  <div class="span2">
+  </div>
+  <div class="span10">
+    <table with="100%" border="1">
+      <tr>
+	<th>Interpret</th>
+	<th>Titel</th>
+	<th>Album</th>
+	<th>verwendete Länge</th>
+      </tr>	
+      <% @video.audiotracks.each do |track| %>
+	<tr>
+	  <td><%= track.interpreter %></th>
+	  <td><%= track.title %></th>
+	  <td><%= track.album %></th>
+	  <td><%= nice_time(track.fraction_length) %>
+	</tr>
+      <% end %>
+    </table>
+
+    <%= link_to "zurück zum Video", edit_video_path(@video) %>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="row-fluid">
+  <div class="span2">
+  </div>
+  <div class="span10">
+    <table width="100%" border="1">
+      <tr>
+	<th>Bildnummer</th>
+	<th>Länge</th>
+	<th>Bild</th>
+	<th>Bildbeschreibung</th>
+	<th>Ton</th>
+	<th>Aufnahmeort</th>
+	<th>Notiz</th>
+      </tr>
+      <% @video.takes.each do |take| %>
+	<%= render :partial => 'list_take', :locals => {:take => take} %>
+      <% end %>
+     </table>
+    <%= link_to "Zurück zum Video", edit_video_path(@video) %>
+  </div>
+</div>

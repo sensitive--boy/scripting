@@ -1,4 +1,5 @@
 class CharactersController < ApplicationController
+  before_filter :authenticate_user!
   autocomplete :person, :name, :full=>true
   
   def create

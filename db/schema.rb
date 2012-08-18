@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120809151806) do
+ActiveRecord::Schema.define(:version => 20120813232508) do
 
   create_table "addresses", :force => true do |t|
     t.string   "venue"
@@ -78,12 +78,24 @@ ActiveRecord::Schema.define(:version => 20120809151806) do
   add_index "chosen_items", ["technical_item_id"], :name => "index_chosen_items_on_technical_item_id"
   add_index "chosen_items", ["video_id"], :name => "index_chosen_items_on_video_id"
 
+  create_table "infos", :force => true do |t|
+    t.string   "name"
+    t.string   "function"
+    t.string   "addition"
+    t.integer  "szene_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "infos", ["szene_id"], :name => "index_infos_on_szene_id"
+
   create_table "media_files", :force => true do |t|
     t.string   "description"
     t.string   "origin"
     t.integer  "szene_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.boolean  "free_to_use"
   end
 
   add_index "media_files", ["szene_id"], :name => "index_media_files_on_szene_id"
@@ -151,6 +163,8 @@ ActiveRecord::Schema.define(:version => 20120809151806) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "serial_id"
+    t.text     "moderation"
+    t.text     "short_text"
   end
 
   add_index "shows", ["user_id"], :name => "index_shows_on_user_id"

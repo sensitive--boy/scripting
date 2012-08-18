@@ -17,9 +17,9 @@
 	  </tr>
 	  <% @shows.each do |show| %>
 	    <tr>
-	      <td><%= show.title %></td>
+	      <td><%= link_to show.title, edit_show_path(show) %></td>
 	      <td><%= show.toppic %></td>
-	      <td><%= show.date %></td>
+	      <td><%= l show.date, :format => :g_date %></td>
 	      <td></td>
 	    </tr>
 	  <% end %>
@@ -40,7 +40,7 @@
 	      <tr>
 		<td><%= link_to video.title, edit_video_path(video) %></td>
 		<td><%= video.user.person.name %></td>
-		<td>-</td>
+		<td><%= video.show.title if video.show %></td>
 		<td><%= video.state %></td>
 	      </tr>
 	    <% end %>
@@ -63,7 +63,7 @@
 	    <tr>
 	      <td><%= link_to video.title, edit_video_path(video) %></td>
 	      <td><%= video.user.person.name %></td>
-	      <td>-</td>
+	      <td><%= video.show.title if video.show %></td>
 	      <td><%= video.state %></td>
 	    </tr>
 	  <% end %>

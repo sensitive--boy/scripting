@@ -1,2 +1,42 @@
-<h1>Show#edit</h1>
-<p>Find me in app/views/show/edit.html.erb</p>
+<div class="row-fluid">
+  <div class="span2">
+  </div>
+  <div class="span10">
+    <h1><%= @show.title %></h1>
+    <p>Thema: <%= @show.toppic %><br>
+      Sendedatum: <%= l @show.date, :format => :g_date %><br><br>
+      <b>Beiträge:</b></p>
+
+    <table>
+      <% @show.videos.each do |video| %>
+	<tr>
+	  <td><%= video.title %></td>
+	  <td><%= video.format %></td>
+	  <td><%= nice_time(video.supposed_duration) %> Min</td>
+	  <td><%= link_to video.user.person.name, person_path(video.user.person) %></td>
+	  <td><%= video.state %></td>
+	</tr>
+      <% end %>
+    </table>
+
+    <%= form_for @show do |f| %>
+      <div class="fields">
+	<%= f.label "Sendung gehört zu Serie" %>
+	<%= f.collection_select :serial_id, Serial.where('for_shows' => true), :id, :title, {:include_blank => true} %> | 
+	<%= link_to "Serie anlegen", new_serial_path(:for_shows => true) %>
+      </div>
+
+      <div class="fields">
+	<%= f.label :moderation %>
+	<%= f.text_area :moderation %>
+      </div>
+
+      <div class="fields">
+	<%= f.label :short_text %>
+	<%= f.text_area :short_text %>
+      </div>
+      <%= f.submit %>
+    <% end %>
+    <%= link_to "Zurück zur Übersicht", videos_showmy_path %>
+  </div>
+</div>

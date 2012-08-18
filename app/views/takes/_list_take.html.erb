@@ -1,0 +1,14 @@
+<tr>
+  <td><%= take.szene.position %> / <%= take.position %></td>
+  <td><%= nice_time(take.duration) %></td>
+  <td><% if take.pictures %>
+	<% take.pictures.each do |pic| %>
+	  <%= image_tag pic.image_url(:thumb) if pic.image? %>
+	<% end %>
+      <% end %>
+  </td>
+  <td><%= take.view_desc %></td>
+  <td><%= take.audio_desc %></td>
+  <td><%= take.szene.place %></td>
+  <td><%= take.note %></td>
+</tr>

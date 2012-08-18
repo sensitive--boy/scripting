@@ -1,0 +1,18 @@
+<%= form_for @media_file do |f| %>
+
+<div class ="fields">
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+</div>
+<div class="fields">
+  <%= f.label :origin %>
+  <%= f.text_field :origin %>
+</div>
+<div class="fields">
+  <%= f.label "Rechte geklärt" %>
+  <%= f.check_box :free_to_use %>
+</div>
+<%= f.hidden_field :szene_id %>
+<%= f.submit %> | <%= link_to "Abbrechen und zurück zur Szene", edit_szene_path(:id => @media_file.szene.id) %> 
+
+<% end %>

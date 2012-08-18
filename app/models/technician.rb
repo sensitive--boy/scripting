@@ -5,7 +5,7 @@ class Technician < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :login
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :username
   # attr_accessible :title, :body
   
   # Virtual attribut for authenticatingby either username or email

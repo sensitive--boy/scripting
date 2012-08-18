@@ -1,11 +1,13 @@
 class TakesController < ApplicationController
-  
+  before_filter :authenticate_user!
   autocomplete :address, :address, :full => true
 
   
     def index
-    @takes = Take.all
-     #@takes = Take.where(:video => ), :group => :address)
+    @video = Video.find(params[:video_id])
+    
+    # @takes = @video.takes.group(:address_id)
+    # puts @takes.count
    end
 
    # GET /takes/1

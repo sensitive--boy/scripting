@@ -1,0 +1,22 @@
+<%= form_for @audiotrack do |f| %>
+
+<div class ="fields">
+  <%= f.label :interpreter %>
+  <%= f.text_field :interpreter %>
+</div>
+<div class="fields">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<div class="fields">
+  <%= f.label :album %>
+  <%= f.text_field :album %>
+</div>
+<div class="fields">
+  <%= f.label "verwendete Länge" %>
+  <%= f.text_field :fraction_length %>
+</div>
+<%= f.hidden_field :szene_id %>
+<%= f.submit %> | <%= link_to "Abbrechen und zurück zur Szene", edit_szene_path(:id => @audiotrack.szene.id) %> 
+
+<% end %>

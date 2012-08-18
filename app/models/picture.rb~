@@ -1,5 +1,0 @@
-class Picture < ActiveRecord::Base
-  belongs_to :take
-  attr_accessible :description, :image, :position
-  mount_uploader :image, ImageUploader
-end

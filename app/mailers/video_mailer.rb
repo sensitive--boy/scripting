@@ -18,5 +18,12 @@ class VideoMailer < ActionMailer::Base
     @person=video.user.person
     @url  = "http://strong-flower-5407.heroku.com/"
     mail(:to => video.advisor.person.email, :subject => "Neuer Beitrag angelegt")
-  end  
+  end
+  
+  def changed_state_mail(video)
+    @video=video
+    @person=video.user.person
+    @url  = "http://strong-flower-5407.heroku.com/"
+    mail(:to => video.advisor.person.email, :subject => "Video Status geändert")
+  end 
 end

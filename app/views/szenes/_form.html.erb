@@ -1,25 +1,23 @@
 <%= form_for @szene do |f| %>
-<h3>Szene in: <%= @szene.sequence.name %></h3>
-<div class="fields">
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-</div>
-<div class="fields">
-  <%= f.label :place %>
-  <%= f.text_field :place %>
-</div>
-<div class="fields">
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-</div>
-<div class="fields">
-  <%= f.label :props %>
-  <%= f.text_field :props %>
-</div>
-<%= f.hidden_field :sequence_id, :value => @szene.sequence.id %>
+  <h3>Szene in: <%= @szene.sequence.video.title %> / <%= @szene.sequence.name %></h3>
+  <div class="fields">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="fields">
+    <%= f.label :place %>
+    <%= f.text_field :place %>
+  </div>
+  <div class="fields">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div class="fields">
+    <%= f.label :props %>
+    <%= f.text_field :props %>
+  </div>
+  <%= f.hidden_field :sequence_id, :value => @szene.sequence.id %>
 
-<%= link_to "add Audiotrack" %><br>
-<%= link_to "add Media file" %><br>
 
-<%= f.submit %> | <%= link_to "Zurück ohne speichern", script_video_path(:id => @szene.sequence.video.id) %>
+  <%= f.submit %> | <%= link_to "Zurück ohne speichern", script_video_path(:id => @szene.sequence.video.id) %>
 <% end %>

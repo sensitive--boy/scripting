@@ -1,5 +1,5 @@
 class SequencesController < ApplicationController
-  
+  before_filter :authenticate_user!
 
   def index
     @sequences = Sequences.all
@@ -59,17 +59,6 @@ class SequencesController < ApplicationController
     end
     render :nothing => true
   end
-  
-#def sort
-#@sequences = Sequence.all
-#@sequences.each do |seq|
-#seq.position = params['sequence'].index(seq.id.to_s) + 1
-#seq.save
-#end
-
-#render :nothing => true
-#end
-  
   
    # PUT /sequences/1
    # PUT /sequences/1.xml

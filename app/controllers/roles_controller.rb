@@ -1,4 +1,5 @@
 class RolesController < ApplicationController
+  before_filter :authenticate_user!
   autocomplete :person, :name, :full => true
   
   def new

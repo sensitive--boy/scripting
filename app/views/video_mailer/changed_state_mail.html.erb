@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hallo, <%= @video.advisor.person.name %></h1>
+    <p>
+      Das Video "<%= @video.title %>" hat seinen Status ge&auml;ndert. Neuer Status: <%= @video.state %><br />
+      Verantwortliche Person: <%= @person.name %><br/>
+    </p>
+    <p>
+     Zum Einloggen folge diesem Link: <%= @url %>
+    </p>
+    <p>Herzlichen Dank!</p>
+  </body>
+</html>

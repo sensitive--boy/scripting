@@ -144,6 +144,10 @@ nav {
   white-space: nowrap;
 }
 
+nav li a:visited {
+  color: #09c;
+}
+
 nav ul {
   margin: 0;
   padding: 0;

@@ -44,7 +44,7 @@
   font-weight: bold;
   background: #ccc;
   border: solid;
-  border-color: #f66;
+  border-color: #f60;
 }
 .summary section {
   padding-top: 7px;

@@ -9,4 +9,5 @@ en:
 
     time:
       formats:
-        videotime: "%M:%S"
+        g_date: "%d.%m.%Y"
+        g_datetime: "%d.%m.%Y %H.%M Uhr"

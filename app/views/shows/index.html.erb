@@ -1,15 +1,21 @@
-<h1>Show#index</h1>
-<%= form_tag shows_path, :method => 'get', :id => "shows_search" do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :topic => nil %>
-  </p>
-<ul>
-<% @shows.each do |show| %>
-  <li><%= show.title %> --- <%= show.date %> --- <%= show.duration %> Sekunden --- <%= show.user.person.name %> --- Status </li>
-<% end %>
-</ul>
-<%= will_paginate @videos %>
-<% end %>
+<div class="row-fluid">
+  <div class="span2">
+  </div>
+  <div class="span10">
+    <h1>Shows</h1>
+    <%= form_tag shows_path, :method => 'get', :id => "shows_search" do %>
+      <p>
+	<%= text_field_tag :search, params[:search] %>
+	<%= submit_tag "Search", :topic => nil %>
+      </p>
+      <ul>
+	<% @shows.each do |show| %>
+	  <li><%= link_to show.title, show_path(show) %> --- <%= l show.date, :format => :g_date %> --- <%= nice_time(show.duration) %> Minuten --- <%= show.user.person.name %> --- Status </li>
+	<% end %>
+      </ul>
+      <%= will_paginate @shows %>
+    <% end %>
 
-<%= link_to 'back', videos_showmy_path %>
+    <%= link_to 'back', videos_showmy_path %>
+  </div>
+</div>

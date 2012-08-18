@@ -1,6 +1,10 @@
 Scripting::Application.routes.draw do
 
 
+  resources :infos
+  resources :audiotracks
+  resources :media_files
+
   #match '/autocomplete/people' => "autocomplete#people"
   get "videos/showmy"
   
@@ -36,6 +40,8 @@ Scripting::Application.routes.draw do
       get 'acc_prod', :on => :member
       get 'fin_vid', :on => :member
       get 'arch_vid', :on => :member
+      get 'takelist', :on => :member
+      get 'musiclist', :on => :member
       put 'add_role', :on => :member
       put 'add_item', :on => :member
     end

@@ -1,8 +1,0 @@
-<%= form_for @sequence, :url=>sequences_path do |f| %>
-<div class="fields">
-<%= f.label :name %>
-<%= f.text_field :name %>
-</div>
-<%= f.hidden_field :video_id %>
-<%= f.submit %>
-<% end %>

@@ -33,6 +33,8 @@ GEM
     annotate (2.4.1.beta1)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bootstrap-will_paginate (0.0.7)
+      will_paginate
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -207,6 +209,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   annotate (= 2.4.1.beta1)
+  bootstrap-will_paginate
   capybara (>= 1.1.2)
   carrierwave
   coffee-rails (~> 3.2.1)

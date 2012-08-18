@@ -1,4 +1,4 @@
-<h1>Videos#index</h1>
+<h1>Videos</h1>
 <%= form_tag videos_path, :method => 'get', :id => "videos_search" do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
@@ -12,7 +12,7 @@
 <th>Duration</th>
 <th>Status</th>
 </tr>
-<%= @videos.each do |video| %>
+<% @videos.each do |video| %>
   <tr>
     <td><%= link_to video.title, video %></td>
     <td><%= video.user.person.name %></td>
